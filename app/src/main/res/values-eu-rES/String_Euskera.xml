@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RetoAlojamiento</string>
     <string name="email_login">LOGIN</string>
-    <string name="contrasena_login">CONTRASEÑA</string>
+    <string name="contrasena_login">Pasahitza</string>
 </resources>
