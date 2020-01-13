@@ -40,6 +40,7 @@ public class Conexiones {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
 
         return  estadoConexion;

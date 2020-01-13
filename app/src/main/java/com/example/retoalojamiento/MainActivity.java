@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(con.conectarMySQL()==true){
 
-            Toast.makeText(MainActivity.this, "entra", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "entra mazo de bien aaaaah", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(MainActivity.this, "no entra", Toast.LENGTH_LONG).show();
         }
