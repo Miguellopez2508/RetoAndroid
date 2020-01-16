@@ -12,4 +12,5 @@
     <string name="btn_Registrar">Registrar</string>
     <string name="btn_ConfirmarContraseña">Confirmar Contraseña</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiZW5la29iczk4IiwiYSI6ImNrNWNjbmZ2YjFwbnczbXBhcTFjOGZqMnUifQ.3HfgbQf6iq4t7JrdYR8FqA</string>
+    <string name="bienvenida">Bienvenido, </string>
 </resources>

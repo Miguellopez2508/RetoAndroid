@@ -11,4 +11,7 @@
     <string name="btn_Registrar">Erregistro</string>
     <string name="btn_ConfirmarContraseña">Pasahitza Berretsi</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiZW5la29iczk4IiwiYSI6ImNrNWNjbmZ2YjFwbnczbXBhcTFjOGZqMnUifQ.3HfgbQf6iq4t7JrdYR8FqA</string>
+    <string name="app_name">RetoAlojamiento</string>
+    <string name="contrasena_login">Pasahitza</string>
+    <string name="bienvenida">Ongi Etorri, </string>
 </resources>
