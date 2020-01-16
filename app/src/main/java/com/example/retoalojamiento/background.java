@@ -2,7 +2,10 @@ package com.example.retoalojamiento;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,6 +33,13 @@ public class background extends AsyncTask<String, Void,String> {
     protected void onPostExecute(String s){
         dialog.setMessage(s);
         dialog.show();
+        if(s.equals("login success")){
+            super.onPostExecute(s);
+            context.startActivity(new Intent(context, Mapa.class));
+        } else {
+            Toast.makeText(context, "USUARIO O CONTRASEÑA INCORRECTA", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     protected String doInBackground(String... voids){

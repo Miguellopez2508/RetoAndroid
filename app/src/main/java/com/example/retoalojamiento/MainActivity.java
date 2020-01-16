@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Statement st;
     private Connection con;
     private ResultSet rs;
+    String resultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button button = findViewById(R.id.button);
         button.setOnClickListener(this);
 
-        //abrirConexion();
     }
-    public void abrirConexion(){
-        Conexiones con = new Conexiones();
-
-        if(con.conectarMySQL()==true){
-
-            Toast.makeText(MainActivity.this, "entra mazo de bien aaaaah", Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(MainActivity.this, "no entra", Toast.LENGTH_LONG).show();
-        }
-    }
-
     public static final String md5(final String s) {
         final String MD5 = "MD5";
         try {
@@ -81,9 +70,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         String contrasena = md5(contraseña.getText().toString());
         String email = gmail.getText().toString();
-        Toast.makeText(MainActivity.this, contrasena, Toast.LENGTH_LONG).show();
         background bg = new background(this);
-        bg.execute(email,contrasena);
-
+        bg.execute(email, contrasena);
+        contraseña.setText("");
     }
 }
