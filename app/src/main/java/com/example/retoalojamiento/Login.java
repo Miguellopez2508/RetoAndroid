@@ -2,7 +2,6 @@ package com.example.retoalojamiento;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,16 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private EditText gmail;
     private EditText valortemporal;
@@ -33,24 +29,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        gmail = (EditText) findViewById(R.id.editText);
-        contraseña = (EditText) findViewById(R.id.editText2);
+        gmail = (EditText) findViewById(R.id.et_correo);
+        contraseña = (EditText) findViewById(R.id.et_contrasena);
 
-        Button button = findViewById(R.id.button);
+        Button button = findViewById(R.id.iniciar_sesion);
         button.setOnClickListener(this);
 
-        //abrirConexion();
     }
-    public void abrirConexion(){
-        Conexiones con = new Conexiones();
 
-        if(con.conectarMySQL()==true){
-
-            Toast.makeText(MainActivity.this, "entra mazo de bien aaaaah", Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(MainActivity.this, "no entra", Toast.LENGTH_LONG).show();
-        }
-    }
 
     public static final String md5(final String s) {
         final String MD5 = "MD5";
@@ -81,9 +67,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         String contrasena = md5(contraseña.getText().toString());
         String email = gmail.getText().toString();
-        Toast.makeText(MainActivity.this, contrasena, Toast.LENGTH_LONG).show();
+        Toast.makeText(Login.this, contrasena, Toast.LENGTH_LONG).show();
         background bg = new background(this);
         bg.execute(email,contrasena);
 
+    }
+
+    public void BotonAceptar (View view){
+        Intent intent= new Intent(this, Registro.class);
+        startActivity(intent);
     }
 }
