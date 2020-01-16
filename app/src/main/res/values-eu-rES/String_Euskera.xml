@@ -3,4 +3,5 @@
     <string name="app_name">RetoAlojamiento</string>
     <string name="email_login">LOGIN</string>
     <string name="contrasena_login">Pasahitza</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiZW5la29iczk4IiwiYSI6ImNrNWNjbmZ2YjFwbnczbXBhcTFjOGZqMnUifQ.3HfgbQf6iq4t7JrdYR8FqA</string>
 </resources>

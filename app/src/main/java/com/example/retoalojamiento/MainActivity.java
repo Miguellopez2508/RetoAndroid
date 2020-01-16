@@ -2,21 +2,27 @@ package com.example.retoalojamiento;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText gmail;
+    private EditText valortemporal;
     private EditText contraseña;
     private Statement st;
     private Connection con;
@@ -30,9 +36,11 @@ public class MainActivity extends AppCompatActivity {
         gmail = (EditText) findViewById(R.id.editText);
         contraseña = (EditText) findViewById(R.id.editText2);
 
-        abrirConexion();
-    }
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(this);
 
+        //abrirConexion();
+    }
     public void abrirConexion(){
         Conexiones con = new Conexiones();
 
@@ -44,55 +52,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public static final String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance(MD5);
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public void conectar()
-    {
-        String pass = "";
-
-
-        try{
-
-            String driver = "com.mysql.jdbc.Driver";
-            String urlMySQL = "jdbc:mysql://localhost:3306/";
-            Class.forName(driver).newInstance();
-
-            con = DriverManager.getConnection(urlMySQL + "alojamiento","root","");
-            st = con.createStatement();
-            rs = st.executeQuery("Select password from usuario where email = admin@gmail.com ");
-
-            while(rs.next())
-            {
-                pass = rs.getString("password");
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
             }
+            return hexString.toString();
 
-            Toast.makeText(MainActivity.this, pass , Toast.LENGTH_LONG).show();
-
-        }catch(Exception ex)
-        {
-            Toast.makeText(MainActivity.this, "Error al obtener resultados de la BBDD: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
-        finally
-        {
-            try {
-                rs.close();
-                st.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        return "";
     }
 
+    @Override
+    public void onClick(View view) {
+        String contrasena = md5(contraseña.getText().toString());
+        String email = gmail.getText().toString();
+        Toast.makeText(MainActivity.this, contrasena, Toast.LENGTH_LONG).show();
+        background bg = new background(this);
+        bg.execute(email,contrasena);
 
+    }
 }
