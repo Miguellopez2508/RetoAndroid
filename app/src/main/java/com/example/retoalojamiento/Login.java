@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -18,12 +17,8 @@ import java.sql.Statement;
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private EditText gmail;
-    private EditText valortemporal;
     private EditText contraseña;
-    private Statement st;
-    private Connection con;
-    private ResultSet rs;
-    String resultado;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +28,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         gmail = (EditText) findViewById(R.id.et_correo);
         contraseña = (EditText) findViewById(R.id.et_contrasena);
 
-        Button button = findViewById(R.id.iniciar_sesion);
+        Button button = findViewById(R.id.btn_iniciarSesion);
         button.setOnClickListener(this);
 
     }
@@ -42,8 +37,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         final String MD5 = "MD5";
         try {
             // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
+            MessageDigest digest = java.security.MessageDigest.getInstance(MD5);
             digest.update(s.getBytes());
             byte messageDigest[] = digest.digest();
 
@@ -72,7 +66,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         contraseña.setText("");
     }
 
-    public void BotonRegistrar (View view){
+    public void BotonRegistro (View view){
         Intent intent= new Intent(this, Registro.class);
         startActivity(intent);
     }
