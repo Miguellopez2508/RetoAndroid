@@ -23,6 +23,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private Statement st;
     private Connection con;
     private ResultSet rs;
+    String resultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         button.setOnClickListener(this);
 
     }
-
 
     public static final String md5(final String s) {
         final String MD5 = "MD5";
@@ -67,13 +67,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         String contrasena = md5(contraseña.getText().toString());
         String email = gmail.getText().toString();
-        Toast.makeText(Login.this, contrasena, Toast.LENGTH_LONG).show();
         background bg = new background(this);
-        bg.execute(email,contrasena);
-
+        bg.execute(email, contrasena);
+        contraseña.setText("");
     }
 
-    public void BotonAceptar (View view){
+    public void BotonRegistrar (View view){
         Intent intent= new Intent(this, Registro.class);
         startActivity(intent);
     }
