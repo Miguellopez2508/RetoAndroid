@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -36,7 +35,7 @@ public class background extends AsyncTask<String, Void,String> {
         Toast.makeText(context, s, Toast.LENGTH_LONG).show();
         if(!"0 results".equals(s)){
             super.onPostExecute(s);
-            context.startActivity(new Intent(context, PrimerPanel.class));
+            context.startActivity(new Intent(context, Menu.class));
         } else {
             Toast.makeText(context, "USUARIO O CONTRASEÑA INCORRECTA", Toast.LENGTH_LONG).show();
         }

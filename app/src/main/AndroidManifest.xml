@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PrimerPanel"></activity>
+        <activity android:name=".Menu"></activity>
         <activity android:name=".Registro" />
         <activity android:name=".Mapa" />
         <activity android:name=".Login">

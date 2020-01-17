@@ -3,7 +3,7 @@
     <string name="correo_login">Posta Elektronikoa</string>
     <string name="nombre_registro">Izena</string>
     <string name="apellidos_registro">Abizenak</string>
-    <string name="dni_registro">Dni</string>
+    <string name="dni_registro">Nan</string>
     <string name="telefono_registro">Mugikorra</string>
     <string name="Iniciar_Sesion">Sartu</string>
     <string name="AunNoTienesCuenta">Oraindik ez duzu konturik?</string>
@@ -18,4 +18,5 @@
     <string name="busqueda">Bilaketa</string>
     <string name="mapa">Mapa</string>
     <string name="salir">Irten</string>
+    <string name="dni_incorrecto">NAN OKERRA</string>
 </resources>
