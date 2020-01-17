@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class PrimerPanel extends AppCompatActivity {
+public class Menu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_primer_panel);
+        setContentView(R.layout.menu);
     }
     public void SalirMenuBtn (View view){
         Intent intent= new Intent(this, Login.class);
