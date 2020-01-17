@@ -61,8 +61,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         String contrasena = md5(contraseña.getText().toString());
         String email = gmail.getText().toString();
+        String SqlQuery = "SELECT dni, nombre FROM usuario WHERE email='" + email +"' AND password='" + contrasena + "'";
         background bg = new background(this);
-        bg.execute(email, contrasena);
+        bg.execute(SqlQuery, "select");
         contraseña.setText("");
     }
 
