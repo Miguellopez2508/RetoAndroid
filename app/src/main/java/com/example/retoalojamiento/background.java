@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -19,7 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class background extends AsyncTask<String, Void,String> {
+public class background extends AsyncTask<String, Void, String> {
 
     AlertDialog dialog;
     Context context;
@@ -44,7 +43,7 @@ public class background extends AsyncTask<String, Void,String> {
     }
 
     protected String doInBackground(String... voids){
-        String result = "";
+        StringBuilder result = new StringBuilder();
         String user = voids[0];
         String pass = voids[1];
 
@@ -73,22 +72,22 @@ public class background extends AsyncTask<String, Void,String> {
             String line = "";
 
             while((line = reader.readLine()) != null){
-                result += line;
+                result.append(line);
             }
 
             reader.close();
             ips.close();
             http.disconnect();
 
-            return result;
+            return result.toString();
 
         } catch (MalformedURLException e) {
-            result = e.getMessage() + "ERROR 1";
+            result.append(e.getMessage() + "ERROR 1");
         } catch (IOException e) {
-            result = e.getMessage() + "ERROR 2";
+            result.append(e.getMessage() + "ERROR 2");
         }
 
-        return result;
+        return result.toString();
     }
 
 }
