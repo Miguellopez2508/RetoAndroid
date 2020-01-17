@@ -80,6 +80,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,30 +88,15 @@
                 android:textColor="#fff"
                 android:textSize="16sp" />
 
-
             <Button
                 android:id="@+id/btn_crearCuenta"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:background="@android:color/transparent"
+                android:background="@drawable/btn_fondo_color"
                 android:onClick="BotonRegistro"
                 android:text="@string/btn_CrearCuenta"
                 android:textColor="#fff" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="99dp"
-                android:layout_marginLeft="99dp"
-                android:layout_marginTop="22dp"
-                android:ems="10"
-                android:hint="Contraseña"
-                android:inputType="textPersonName"
-                android:password="true"
-                app:layout_constraintStart_toStartOf="parent" />
-
 
         </LinearLayout>
 
