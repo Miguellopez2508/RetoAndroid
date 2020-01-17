@@ -34,8 +34,7 @@ public class Registro extends AppCompatActivity {
 
 
     public void comprobarDatos(View v){
-
-        if (validarDni()==false || dni.getText().toString().equals("")) {
+        /*if (validarDni()==false || dni.getText().toString().equals("")) {
             Toast.makeText(this, "DNI INCORRECTO", Toast.LENGTH_SHORT).show();
         }else if (validarNombre() == false || nombre.getText().toString().equals("")) {
             Toast.makeText(this, "NOMBRE INCORRECTO", Toast.LENGTH_SHORT).show();
@@ -49,9 +48,13 @@ public class Registro extends AppCompatActivity {
             Toast.makeText(this, "CONTRASEÑA NO COINCIDE", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "Registro realizado correctamente", Toast.LENGTH_SHORT).show();
-        }
-
-
+            String SqlQuery = "INSERT INTO usuario ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contraseña.getText().toString() + "', 0)";
+            background bg = new background(this);
+            bg.execute(SqlQuery, "insert");
+        }*/
+        String SqlQuery = "INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contraseña.getText().toString() + "', 0)";
+        background bg = new background(this);
+        bg.execute(SqlQuery, "insert");
     }
 
     public boolean validarTelefono(){
