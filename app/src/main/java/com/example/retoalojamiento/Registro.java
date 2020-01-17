@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 public class Registro extends AppCompatActivity {
 
     private EditText dni;
+    private EditText nombre;
+    private EditText apellidos;
     private EditText correo;
     private EditText telefono;
 
@@ -20,6 +22,8 @@ public class Registro extends AppCompatActivity {
         setContentView(R.layout.registro);
 
         dni=(EditText)findViewById(R.id.et_dni);
+        nombre =(EditText)findViewById(R.id.et_nombre);
+        apellidos=(EditText)findViewById(R.id.et_apellidos);
         correo=(EditText)findViewById(R.id.et_email);
         telefono=(EditText)findViewById(R.id.et_telefono);
     }
@@ -29,6 +33,10 @@ public class Registro extends AppCompatActivity {
 
         if (validarDni()==false){
             Toast.makeText(this, "DNI INCORRECTO", Toast.LENGTH_SHORT).show();
+        }else if (validarNombre() == false) {
+            Toast.makeText(this, "NOMBRE INCORRECTO", Toast.LENGTH_SHORT).show();
+        }else if (validarApellidos() == false) {
+            Toast.makeText(this, "APELLIDOS INCORRECTOS", Toast.LENGTH_SHORT).show();
         }else if (validarCorreo()==false){
             Toast.makeText(this, "CORREO INCORRECTO", Toast.LENGTH_SHORT).show();
         }else if (validarTelefono()==false){
@@ -44,9 +52,39 @@ public class Registro extends AppCompatActivity {
 
         Pattern pattern = Pattern.compile("^(\\+34|0034|34)?[6789]\\d{8}$");
 
-        String email = telefono.getText().toString();
+        String tlf = telefono.getText().toString();
 
-        Matcher mather = pattern.matcher(email);
+        Matcher mather = pattern.matcher(tlf);
+
+        if (mather.find() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean validarNombre(){
+
+        Pattern pattern = Pattern.compile("^[A-Za-zá-úÁ-ÚñÑ ]*$");
+
+        String nom = nombre.getText().toString();
+
+        Matcher mather = pattern.matcher(nom);
+
+        if (mather.find() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean validarApellidos(){
+
+        Pattern pattern = Pattern.compile("^[A-Za-zá-úÁ-ÚñÑ ]*$");
+
+        String ape = apellidos.getText().toString();
+
+        Matcher mather = pattern.matcher(ape);
 
         if (mather.find() == true) {
             return true;
@@ -92,8 +130,8 @@ public class Registro extends AppCompatActivity {
     private boolean soloNumeros() {
 
         int i, j = 0;
-        String numero = ""; // Es el número que se comprueba uno a uno por si hay alguna letra entre los 8 primeros dígitos
-        String miDNI = ""; // Guardamos en una cadena los números para después calcular la letra
+        String numero = "";
+        String miDNI = "";
         String[] unoNueve = {"0","1","2","3","4","5","6","7","8","9"};
         String DNI = dni.getText().toString();
 
