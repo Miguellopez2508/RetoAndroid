@@ -14,5 +14,8 @@
     <string name="app_name">RetoAlojamiento</string>
     <string name="contrasena_login">Password</string>
     <string name="bienvenida">Welcome, </string>
-
+    <string name="reservas">My Bookings</string>
+    <string name="busqueda">Search</string>
+    <string name="mapa">Map</string>
+    <string name="salir">Exit</string>
 </resources>

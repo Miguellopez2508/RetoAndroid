@@ -71,13 +71,14 @@
             android:text="@string/Iniciar_Sesion"
             android:textColor="#fff"
             android:textSize="16sp" />
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginRight="20dp"
+            android:layout_width="382dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -97,19 +98,18 @@
                 android:text="@string/btn_CrearCuenta"
                 android:textColor="#fff" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginLeft="99dp"
-        android:layout_marginTop="22dp"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPersonName"
-        android:password="true"
-        app:layout_constraintStart_toStartOf="parent"
-         />
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="99dp"
+                android:layout_marginLeft="99dp"
+                android:layout_marginTop="22dp"
+                android:ems="10"
+                android:hint="Contraseña"
+                android:inputType="textPersonName"
+                android:password="true"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </LinearLayout>

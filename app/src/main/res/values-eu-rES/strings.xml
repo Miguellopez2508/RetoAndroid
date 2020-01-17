@@ -14,4 +14,8 @@
     <string name="app_name">RetoAlojamiento</string>
     <string name="contrasena_login">Pasahitza</string>
     <string name="bienvenida">Ongi Etorri, </string>
+    <string name="reservas">Erreserbak </string>
+    <string name="busqueda">Bilaketa</string>
+    <string name="mapa">Mapa</string>
+    <string name="salir">Irten</string>
 </resources>
