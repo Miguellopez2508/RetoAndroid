@@ -19,4 +19,6 @@
     <string name="mapa">Mapa</string>
     <string name="salir">Irten</string>
     <string name="dni_incorrecto">NAN OKERRA</string>
+    <string name="Volver">Itzuli</string>
+    <string name="Cerrar_Sesion">Saioa Itxi</string>
 </resources>

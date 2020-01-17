@@ -19,7 +19,7 @@
         android:background="@drawable/btn_fondo_color"
         android:elevation="5dp"
         android:onClick="SalirMenuBtn"
-        android:text="Salir"
+        android:text="@string/Cerrar_Sesion"
         android:textColor="#fff"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,13 +99,13 @@
 
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/nombre"
         android:layout_width="153dp"
         android:layout_height="34dp"
         android:layout_marginStart="9dp"
         android:layout_marginLeft="9dp"
         android:layout_marginTop="64dp"
-        android:text="TextView"
+        android:text='"nombre"'
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/textView4"
