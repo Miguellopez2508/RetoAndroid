@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,15 +38,16 @@ public class background extends AsyncTask<String, Void, String> {
     }
 
     protected void onPostExecute(String s){
-        //dialog.setMessage(s);
-        //dialog.show();
-        Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+
+        //Toast.makeText(context, s, Toast.LENGTH_LONG).show();
         if(!"0 results".equals(s)){
             try {
-                JSONObject json = new JSONObject(s);
-                Toast.makeText(context, json.toString(), Toast.LENGTH_LONG).show();
+                JSONArray array = new JSONArray(s);
+                JSONObject json_data = array.getJSONObject(0);
+
+                Toast.makeText(context, json_data.getString("dni"), Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
-                e.printStackTrace();
+                Toast.makeText(context, "LA CONCHA DE SU MADRE ", Toast.LENGTH_LONG).show();
             }
 
             super.onPostExecute(s);
