@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +37,7 @@ public class Registro extends AppCompatActivity {
 
 
     public void comprobarDatos(View v){
-        /*if (validarDni()==false || dni.getText().toString().equals("")) {
+        if (validarDni()==false || dni.getText().toString().equals("")) {
             Toast.makeText(this, "DNI INCORRECTO", Toast.LENGTH_SHORT).show();
         }else if (validarNombre() == false || nombre.getText().toString().equals("")) {
             Toast.makeText(this, "NOMBRE INCORRECTO", Toast.LENGTH_SHORT).show();
@@ -48,13 +51,14 @@ public class Registro extends AppCompatActivity {
             Toast.makeText(this, "CONTRASEÑA NO COINCIDE", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "Registro realizado correctamente", Toast.LENGTH_SHORT).show();
-            String SqlQuery = "INSERT INTO usuario ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contraseña.getText().toString() + "', 0)";
+            String contrasenamd5 = md5(contraseña.getText().toString());
+            String SqlQuery = "INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contrasenamd5 + "', 0)";
             background bg = new background(this);
             bg.execute(SqlQuery, "insert");
-        }*/
-        String SqlQuery = "INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contraseña.getText().toString() + "', 0)";
+        }
+        /*String SqlQuery = "INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contraseña.getText().toString() + "', 0)";
         background bg = new background(this);
-        bg.execute(SqlQuery, "insert");
+        bg.execute(SqlQuery, "insert");*/
     }
 
     public boolean validarTelefono(){
@@ -176,4 +180,29 @@ public class Registro extends AppCompatActivity {
 
         return miLetra;
     }
+
+    public static final String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance(MD5);
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 }
