@@ -38,6 +38,7 @@
         android:layout_marginRight="58dp"
         android:background="@drawable/btn_fondo_color"
         android:elevation="5dp"
+        android:onClick="MapaBtn"
         android:text="@string/mapa"
         android:textColor="#fff"
         android:textSize="16sp"

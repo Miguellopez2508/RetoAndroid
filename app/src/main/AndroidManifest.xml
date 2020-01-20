@@ -17,12 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".SeleccionAlojamientos"></activity>
-
-        <activity android:name=".MisReservas"></activity>
+        <activity android:name=".SeleccionAlojamientos" />
+        <activity android:name=".MisReservas" />
         <activity android:name=".Menu" />
-      
         <activity android:name=".Registro" />
         <activity android:name=".Mapa" />
         <activity android:name=".Login">

@@ -5,14 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -39,24 +34,26 @@ public class background extends AsyncTask<String, Void, String> {
 
     protected void onPostExecute(String s){
 
-        //Toast.makeText(context, s, Toast.LENGTH_LONG).show();
         if(!"0 results".equals(s)){
             try {
                 JSONArray array = new JSONArray(s);
                 JSONObject json_data = array.getJSONObject(0);
+                super.onPostExecute(s);
 
-                Toast.makeText(context, json_data.getString("dni"), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, Menu.class);
+                intent.putExtra("variable_nombre", json_data.getString("nombre"));
+                context.startActivity(intent);
+
             } catch (JSONException e) {
-                Toast.makeText(context, "LA CONCHA DE SU MADRE ", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "ERROR", Toast.LENGTH_LONG).show();
             }
 
-            super.onPostExecute(s);
-            context.startActivity(new Intent(context, Menu.class));
         } else {
             Toast.makeText(context, "USUARIO O CONTRASEÑA INCORRECTA", Toast.LENGTH_LONG).show();
         }
 
     }
+
 
     protected String doInBackground(String... voids){
         StringBuilder result = new StringBuilder();
@@ -143,5 +140,7 @@ public class background extends AsyncTask<String, Void, String> {
 
         return result.toString();
     }
+
+
 
 }
