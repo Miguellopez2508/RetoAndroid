@@ -18,4 +18,6 @@
     <string name="mapa">Mapa</string>
     <string name="salir">Salir</string>
     <string name="dni_incorrecto">DNI INCORRECTO</string>
+    <string name="Volver">Volver</string>
+    <string name="Cerrar_Sesion">Cerrar Sesion</string>
 </resources>

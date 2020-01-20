@@ -19,4 +19,6 @@
     <string name="mapa">Map</string>
     <string name="salir">Exit</string>
     <string name="dni_incorrecto">INCORRECT ID</string>
+    <string name="Volver">Come Back</string>
+    <string name="Cerrar_Sesion">Close Session</string>
 </resources>
