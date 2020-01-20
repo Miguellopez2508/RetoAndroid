@@ -68,12 +68,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void BotonRegistro (View view){
-        Intent intent= new Intent(this, SeleccionAlojamientos.class);
+        Intent intent= new Intent(this, Registro.class);
         startActivity(intent);
     }
 
-    public void BotonRegistro2 (View view){
-        Intent intent= new Intent(this, SeleccionAlojamientos.class);
-        startActivity(intent);
-    }
+
 }

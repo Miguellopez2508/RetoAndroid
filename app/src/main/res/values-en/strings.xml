@@ -5,8 +5,8 @@
     <string name="dni_registro">Id</string>
     <string name="apellidos_registro">"Last Name "</string>
     <string name="telefono_registro">Phone</string>
-    <string name="Iniciar_Sesion">Login</string>
-    <string name="AunNoTienesCuenta">" Do not have an account yet?"</string>
+    <string name="btn_IniciarSesion">Login</string>
+    <string name="btn_AunNoTienesCuenta">" Do not have an account yet?"</string>
     <string name="btn_CrearCuenta">" Create Account"</string>
     <string name="btn_Registrar">Register</string>
     <string name="btn_ConfirmarContraseña">Confirm Password</string>
@@ -19,6 +19,12 @@
     <string name="mapa">Map</string>
     <string name="salir">Exit</string>
     <string name="dni_incorrecto">INCORRECT ID</string>
-    <string name="Volver">Come Back</string>
-    <string name="Cerrar_Sesion">Close Session</string>
+    <string name="btn_volver">Come Back</string>
+    <string name="btn_CerrarSesion">Close Session</string>
+    <string name="apellidos_incorrecto">INCORRECT LAST NAME</string>
+    <string name="nombre_incorrecto">INCORRECT NAME</string>
+    <string name="telefono_incorrecto">INCORRECT PHONE</string>
+    <string name="correo_incorrecto">INCORRECT E-MAIL</string>
+    <string name="contraseña_no_coincide">PASSWORD DOES NOT MATCH</string>
+    <string name="registro_realizado">Registration successful.</string>
 </resources>

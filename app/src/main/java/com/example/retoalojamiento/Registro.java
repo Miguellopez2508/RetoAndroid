@@ -34,27 +34,25 @@ public class Registro extends AppCompatActivity {
 
 
     public void comprobarDatos(View v){
-        /*if (validarDni()==false || dni.getText().toString().equals("")) {
-            Toast.makeText(this, "DNI INCORRECTO", Toast.LENGTH_SHORT).show();
+        if (validarDni()==false || dni.getText().toString().equals("")) {
+            Toast.makeText(this, R.string.dni_incorrecto, Toast.LENGTH_SHORT).show();
         }else if (validarNombre() == false || nombre.getText().toString().equals("")) {
-            Toast.makeText(this, "NOMBRE INCORRECTO", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.nombre_incorrecto, Toast.LENGTH_SHORT).show();
         }else if (validarApellidos() == false || apellidos.getText().toString().equals("")) {
-            Toast.makeText(this, "APELLIDOS INCORRECTOS", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.apellidos_incorrecto, Toast.LENGTH_SHORT).show();
         }else if (validarCorreo()==false || correo.getText().toString().equals("")){
-            Toast.makeText(this, "CORREO INCORRECTO", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,  R.string.correo_incorrecto, Toast.LENGTH_SHORT).show();
         }else if (validarTelefono()==false || telefono.getText().toString().equals("")){
-            Toast.makeText(this, "TELEFONO INCORRECTO", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.telefono_incorrecto, Toast.LENGTH_SHORT).show();
         }else if (!contraseña.getText().toString().equals(confirmarContraseña.getText().toString()) || contraseña.getText().toString().equals("")){
-            Toast.makeText(this, "CONTRASEÑA NO COINCIDE", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,  R.string.contraseña_no_coincide, Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this, "Registro realizado correctamente", Toast.LENGTH_SHORT).show();
-            String SqlQuery = "INSERT INTO usuario ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contraseña.getText().toString() + "', 0)";
+            Toast.makeText(this, R.string.registro_realizado, Toast.LENGTH_SHORT).show();
+            String SqlQuery = "INSERT INTO usuario values ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contraseña.getText().toString() + "', 0)";
             background bg = new background(this);
             bg.execute(SqlQuery, "insert");
-        }*/
-        String SqlQuery = "INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contraseña.getText().toString() + "', 0)";
-        background bg = new background(this);
-        bg.execute(SqlQuery, "insert");
+        }
+
     }
 
     public boolean validarTelefono(){
