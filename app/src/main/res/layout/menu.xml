@@ -19,7 +19,7 @@
         android:background="@drawable/btn_fondo_color"
         android:elevation="5dp"
         android:onClick="SalirMenuBtn"
-        android:text="@string/Cerrar_Sesion"
+        android:text="@string/btn_CerrarSesion"
         android:textColor="#fff"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
