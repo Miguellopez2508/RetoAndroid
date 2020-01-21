@@ -3,6 +3,7 @@ package com.example.retoalojamiento;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 import org.json.JSONArray;
@@ -42,14 +43,15 @@ public class background extends AsyncTask<String, Void, String> {
 
                 Intent intent = new Intent(context, Menu.class);
                 intent.putExtra("variable_nombre", json_data.getString("nombre"));
+                intent.putExtra("variable_dni", json_data.getString("dni"));
                 context.startActivity(intent);
 
             } catch (JSONException e) {
-                Toast.makeText(context, "ERROR", Toast.LENGTH_LONG).show();
+
             }
 
         } else {
-            Toast.makeText(context, "USUARIO O CONTRASEÑA INCORRECTA", Toast.LENGTH_LONG).show();
+
         }
 
     }

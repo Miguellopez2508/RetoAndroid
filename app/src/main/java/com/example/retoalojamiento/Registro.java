@@ -1,6 +1,8 @@
 package com.example.retoalojamiento;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -56,6 +58,9 @@ public class Registro extends AppCompatActivity {
             String SqlQuery = "INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contrasenamd5 + "', 0)";
             background bg = new background(this);
             bg.execute(SqlQuery, "insert");
+
+            Intent intent= new Intent(this, Login.class);
+            startActivity(intent);
         }
 
     }
