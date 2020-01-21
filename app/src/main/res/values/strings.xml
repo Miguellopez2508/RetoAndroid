@@ -26,4 +26,15 @@
     <string name="correo_incorrecto">CORREO INCORRECTO</string>
     <string name="contraseña_no_coincide">CONTRASEÑA NO COINCIDE</string>
     <string name="registro_realizado">Registro realizado correctamente.</string>
+    <string name="busquedalabel">Seleccione las condiciones de la busqueda</string>
+    <string name="nombre">Nombre</string>
+    <string name="tipoalojamiento_label">Tipo de Alojamiento</string>
+    <string name="provincia_label">Provincia</string>
+    <string name="Municipio">Municipio</string>
+    <string-array name="tipo_alojamiento">
+        <item></item>
+        <item>Camping</item>
+        <item>Albergue</item>
+        <item>Alojamiento Rural</item>
+    </string-array>
 </resources>

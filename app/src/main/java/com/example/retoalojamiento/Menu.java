@@ -55,4 +55,8 @@ public class Menu extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void abusquedas (View view) {
+        Intent intent= new Intent(this, FiltroBusqueda.class);
+        startActivity(intent);
+    }
 }
