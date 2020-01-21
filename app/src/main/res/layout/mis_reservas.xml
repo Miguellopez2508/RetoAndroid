@@ -40,7 +40,7 @@
         android:layout_marginRight="132dp"
         android:layout_marginBottom="49dp"
         android:background="@drawable/btn_fondo_color"
-        android:text="@string/Volver"
+        android:text="@string/btn_volver"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

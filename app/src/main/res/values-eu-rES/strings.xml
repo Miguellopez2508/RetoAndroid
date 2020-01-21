@@ -5,8 +5,8 @@
     <string name="apellidos_registro">Abizenak</string>
     <string name="dni_registro">Nan</string>
     <string name="telefono_registro">Mugikorra</string>
-    <string name="Iniciar_Sesion">Sartu</string>
-    <string name="AunNoTienesCuenta">Oraindik ez duzu konturik?</string>
+    <string name="btn_IniciarSesion">Sartu</string>
+    <string name="btn_AunNoTienesCuenta">Oraindik ez duzu konturik?</string>
     <string name="btn_CrearCuenta">Sortu Kontua</string>
     <string name="btn_Registrar">Erregistro</string>
     <string name="btn_ConfirmarContraseña">Pasahitza Berretsi</string>
@@ -19,6 +19,12 @@
     <string name="mapa">Mapa</string>
     <string name="salir">Irten</string>
     <string name="dni_incorrecto">NAN OKERRA</string>
-    <string name="Volver">Itzuli</string>
-    <string name="Cerrar_Sesion">Saioa Itxi</string>
+    <string name="btn_volver">Itzuli</string>
+    <string name="btn_CerrarSesion">Saioa Itxi</string>
+    <string name="apellidos_incorrecto">ABIZENAK OKERRA</string>
+    <string name="nombre_incorrecto">IZENA OKERRA</string>
+    <string name="telefono_incorrecto">MUGIKORRA OKERRA</string>
+    <string name="correo_incorrecto">POSTA ELEKTRONIKOA OKERRA</string>
+    <string name="contraseña_no_coincide">PASAHITZAK EZ DIRA BERDINAK</string>
+    <string name="registro_realizado">Erregistroa sortu da.</string>
 </resources>
