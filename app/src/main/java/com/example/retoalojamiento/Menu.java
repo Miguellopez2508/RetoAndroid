@@ -64,4 +64,8 @@ public class Menu extends AppCompatActivity {
         intent.putExtra("dni", recuperamos_variable_dni);
         this.startActivity(intent);
     }
+    public void abusquedas (View view) {
+        Intent intent= new Intent(this, FiltroBusqueda.class);
+        startActivity(intent);
+    }
 }

@@ -1,33 +1,46 @@
 package com.example.retoalojamiento;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 
 public class SeleccionAlojamientos extends AppCompatActivity {
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    String json;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccion_alojamientos);
 
-        String json = jasonToString();
-        ArrayList<Alojamiento> lista_frutas = new ArrayList<>();
+        /*
+        File currentDir = new File("p");
+        Toast notificacion = Toast.makeText(this,  currentDir.getAbsolutePath(), Toast.LENGTH_LONG);
+        notificacion.show();
+
+         */
+
+        boolean uno = true;
+        while (uno) {
+            new cargarJson(this).execute();
+            uno = false;
+        }
+
+        ArrayList<Alojamiento> listaAlojamientos = new ArrayList<>();
 
         JSONObject object = null;
         try {
@@ -39,32 +52,47 @@ public class SeleccionAlojamientos extends AppCompatActivity {
 
         for (int i = 0; i < json_array.length(); i++) {
             try {
-                lista_frutas.add(new Alojamiento(json_array.getJSONObject(i)));
-
+                listaAlojamientos.add(new Alojamiento(json_array.getJSONObject(i)));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        Toast notificacion = Toast.makeText(this, lista_frutas.get(0).getSignatura(), Toast.LENGTH_LONG);
+        Toast notificacion = Toast.makeText(this, listaAlojamientos.get(0).getSignatura(), Toast.LENGTH_LONG);
         notificacion.show();
+
+
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public String jasonToString() {
-        StringBuilder contentBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader("datos.json")))
-        {
 
-            String sCurrentLine;
-            while ((sCurrentLine = br.readLine()) != null)
-            {
-                contentBuilder.append(sCurrentLine).append("\n");
+
+    public class cargarJson extends AsyncTask<Void, Void, String> {
+
+        Context context;
+
+        public cargarJson(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public String doInBackground(Void... voids) {
+            String json = null;
+            try {
+                InputStream is = context.getAssets().open("datos.json");
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+                json = new String(buffer, "UTF-8");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return null;
             }
+            return json;
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+
+        @Override
+        protected void onPostExecute(String result) {
+            json = result;
         }
-        return contentBuilder.toString();
     }
 }

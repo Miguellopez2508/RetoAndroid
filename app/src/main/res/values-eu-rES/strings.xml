@@ -27,4 +27,15 @@
     <string name="correo_incorrecto">POSTA ELEKTRONIKOA OKERRA</string>
     <string name="contraseña_no_coincide">PASAHITZAK EZ DIRA BERDINAK</string>
     <string name="registro_realizado">Erregistroa sortu da.</string>
+    <string name="busquedalabel">Bilaketaren baldintzak aukeratu</string>
+    <string name="nombre">Izena</string>
+    <string name="tipoalojamiento_label">Alojamientoa</string>
+    <string name="provincia_label">Probintzia</string>
+    <string name="Municipio">Udalerria</string>
+    <string-array name="tipo_alojamiento">
+        <item></item>
+        <item>Camping</item>
+        <item>Ostatu</item>
+        <item>Landa-ostatzea</item>
+    </string-array>
 </resources>
