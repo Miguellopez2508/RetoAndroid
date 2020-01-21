@@ -88,8 +88,9 @@ public class MisReservas extends AppCompatActivity {
                     JSONArray array = new JSONArray(s);
 
                     for (int i = 0; i < array.length(); i++) {
+
                         JSONObject json_data = array.getJSONObject(i);
-                        reserva.add("Nombre: " + json_data.getString("NOMBRE") + " Fecha_Inicio: " + json_data.getString("FECHA_INICIO") + " Fecha_Fin: " + json_data.getString("FECHA_FIN"));
+                        reserva.add("Nombre: " + json_data.getString("NOMBRE") +  " Fecha_Inicio: " + json_data.getString("FECHA_INICIO") + " Fecha_Fin: " + json_data.getString("FECHA_FIN"));
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, reserva);

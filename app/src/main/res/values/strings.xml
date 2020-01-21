@@ -37,4 +37,6 @@
         <item>Albergue</item>
         <item>Alojamiento Rural</item>
     </string-array>
+    <string name="usuario_o_contraseña_incorrecta">GMAIL O CONTRASEÑA INCORRECTA</string>
+    <string name="Registro_realizado_correctamente">Registro realizado correctamente.</string>
 </resources>

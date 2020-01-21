@@ -38,4 +38,6 @@
         <item>Hostel</item>
         <item>Rural House</item>
     </string-array>
+    <string name="usuario_o_contraseña_incorrecta">WRONG PASSWORD OR E-MAIL</string>
+    <string name="Registro_realizado_correctamente">Successful registered.</string>
 </resources>

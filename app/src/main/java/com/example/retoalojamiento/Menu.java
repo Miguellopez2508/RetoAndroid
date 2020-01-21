@@ -42,7 +42,7 @@ public class Menu extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
 
-        nombre.setText(preferences.getString("dni",""));
+        nombre.setText(preferences.getString("nombre",""));
 
 
     }

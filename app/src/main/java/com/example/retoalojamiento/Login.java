@@ -79,7 +79,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         String contrasena = md5(contraseña.getText().toString());
         String email = gmail.getText().toString();
         String SqlQuery = "SELECT dni, nombre FROM usuario WHERE email='" + email +"' AND password='" + contrasena + "'";
-        background2 bg = new background2(this);
+        background1 bg = new background1(this);
         bg.execute(SqlQuery, "select");
         contraseña.setText("");
     }
@@ -89,11 +89,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         startActivity(intent);
     }
 
-    public class background2 extends AsyncTask<String, Void, String> {
+    public class background1 extends AsyncTask<String, Void, String> {
 
         AlertDialog dialog;
         Context context;
-        public background2(Context context){
+        public background1(Context context){
             this.context = context;
         }
         protected void onPreExecute(){
@@ -113,8 +113,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     SharedPreferences preferencias = getSharedPreferences("datos",Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferencias.edit();
                     editor.putString("dni", json_data.getString("dni"));
+                    editor.putString("nombre", json_data.getString("nombre"));
                     editor.commit();
-                    Toast.makeText(context, preferencias.getString("dni", ""), Toast.LENGTH_LONG).show();
                     context.startActivity(intent);
 
                 } catch (JSONException e) {
@@ -122,7 +122,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }
 
             } else {
-                Toast.makeText(context, "USUARIO O CONTRASEÑA INCORRECTA", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, R.string.usuario_o_contraseña_incorrecta, Toast.LENGTH_LONG).show();
             }
 
         }
