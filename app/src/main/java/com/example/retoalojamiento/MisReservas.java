@@ -38,7 +38,7 @@ import java.util.ArrayList;
 public class MisReservas extends AppCompatActivity {
 
     private ListView milista;
-
+    ArrayAdapter<String> adapter;
     Connection con;
 
     @Override
@@ -49,6 +49,7 @@ public class MisReservas extends AppCompatActivity {
         milista = (ListView)findViewById(R.id.listView);
 
         new background1(this).execute();
+
 
     }
 
@@ -61,15 +62,14 @@ public class MisReservas extends AppCompatActivity {
     public class background1 extends AsyncTask<Void, Void, Boolean> {
 
         Context context;
-        String resul = "";
         Statement st;
         private String url = "jdbc:mysql://10.0.2.2:3306/alojamiento";
         private String user = "root";
         private String pass = "";
+        ArrayList<String> reservas;
 
         SharedPreferences prefe = getSharedPreferences("datos", Context.MODE_PRIVATE);
         String dni = prefe.getString("dni", "");
-
 
         public background1(Context context) {
             this.context = context;
@@ -83,19 +83,18 @@ public class MisReservas extends AppCompatActivity {
                 st = con.createStatement();
                 ResultSet rs = st.executeQuery("SELECT NOMBRE, FECHA_INICIO, FECHA_FIN FROM reservas, alojamientos where reservas.ID_ALOJAMIENTO = alojamientos.ID and DNI = '" + dni + "'");
 
+                reservas = new ArrayList();
 
                 while (rs.next()) {
-                    resul += rs.getString("nombre");
-                    resul += rs.getString("fecha_inicio");
-                    resul += rs.getString("fecha_fin");
+
+                    reservas.add("Nombre:" + rs.getString("NOMBRE") + " Fecha_inicio: " + rs.getString("FECHA_INICIO") + " Fecha_fin: " + rs.getString("FECHA_FIN"));
                 }
-                st.close();
+                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, reservas);
+
 
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
-            }finally {
-
             }
 
             return true;
@@ -104,7 +103,7 @@ public class MisReservas extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean cargaOk) {
             if (cargaOk) {
-
+                milista.setAdapter(adapter);
             } else {
 
             }

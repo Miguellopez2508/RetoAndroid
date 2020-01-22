@@ -1,7 +1,6 @@
 package com.example.retoalojamiento;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -70,12 +69,6 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
     }
 
 
-//                   SharedPreferences preferencias = getSharedPreferences("datos",Context.MODE_PRIVATE);
-//                   SharedPreferences.Editor editor = preferencias.edit();
-//                   editor.putString("dni", json_data.getString("dni"));
-//                   editor.putString("nombre", json_data.getString("nombre"));
-//                   editor.commit();
-
     public class background1 extends AsyncTask<Void, Void, Boolean> {
 
         String contrasena = md5(contraseña.getText().toString());
@@ -116,12 +109,10 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
         @Override
         protected void onPostExecute(Boolean cargaOk) {
             if(cargaOk == true){
-
-                Toast.makeText(context, "TODO BIEN", Toast.LENGTH_LONG).show();
                 Intent intent= new Intent(context, Menu.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(context, "ERROR EN CORREO O CONTRASEÑA IDIOTA", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, R.string.usuario_o_contraseña_incorrecta, Toast.LENGTH_LONG).show();
             }
         }
     }
