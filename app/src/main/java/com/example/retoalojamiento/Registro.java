@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.mysql.jdbc.Connection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +31,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,51 +48,47 @@ public class Registro extends AppCompatActivity {
     private EditText telefono;
     private EditText contraseña;
     private EditText confirmarContraseña;
+    Connection con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro);
 
-        dni=(EditText)findViewById(R.id.et_dni);
-        nombre =(EditText)findViewById(R.id.et_nombre);
-        apellidos=(EditText)findViewById(R.id.et_apellidos);
-        correo=(EditText)findViewById(R.id.et_email);
-        telefono=(EditText)findViewById(R.id.et_telefono);
-        contraseña=(EditText)findViewById(R.id.et_contrasena);
-        confirmarContraseña=(EditText)findViewById(R.id.et_confirmarContraseña);
+        dni = (EditText) findViewById(R.id.et_dni);
+        nombre = (EditText) findViewById(R.id.et_nombre);
+        apellidos = (EditText) findViewById(R.id.et_apellidos);
+        correo = (EditText) findViewById(R.id.et_email);
+        telefono = (EditText) findViewById(R.id.et_telefono);
+        contraseña = (EditText) findViewById(R.id.et_contrasena);
+        confirmarContraseña = (EditText) findViewById(R.id.et_confirmarContraseña);
     }
 
 
-    public void comprobarDatos(View v){
+    public void comprobarDatos(View v) {
 
-        if (validarDni()==false || dni.getText().toString().equals("")) {
+        /*if (validarDni() == false || dni.getText().toString().equals("")) {
             Toast.makeText(this, R.string.dni_incorrecto, Toast.LENGTH_SHORT).show();
-        }else if (validarNombre() == false || nombre.getText().toString().equals("")) {
+        } else if (validarNombre() == false || nombre.getText().toString().equals("")) {
             Toast.makeText(this, R.string.nombre_incorrecto, Toast.LENGTH_SHORT).show();
-        }else if (validarApellidos() == false || apellidos.getText().toString().equals("")) {
+        } else if (validarApellidos() == false || apellidos.getText().toString().equals("")) {
             Toast.makeText(this, R.string.apellidos_incorrecto, Toast.LENGTH_SHORT).show();
-        }else if (validarCorreo()==false || correo.getText().toString().equals("")){
-            Toast.makeText(this,  R.string.correo_incorrecto, Toast.LENGTH_SHORT).show();
-        }else if (validarTelefono()==false || telefono.getText().toString().equals("")){
+        } else if (validarCorreo() == false || correo.getText().toString().equals("")) {
+            Toast.makeText(this, R.string.correo_incorrecto, Toast.LENGTH_SHORT).show();
+        } else if (validarTelefono() == false || telefono.getText().toString().equals("")) {
             Toast.makeText(this, R.string.telefono_incorrecto, Toast.LENGTH_SHORT).show();
-        }else if (!contraseña.getText().toString().equals(confirmarContraseña.getText().toString()) || contraseña.getText().toString().equals("")){
-            Toast.makeText(this,  R.string.contraseña_no_coincide, Toast.LENGTH_SHORT).show();
-        }else{
+        } else if (!contraseña.getText().toString().equals(confirmarContraseña.getText().toString()) || contraseña.getText().toString().equals("")) {
+            Toast.makeText(this, R.string.contraseña_no_coincide, Toast.LENGTH_SHORT).show();
+        } else {
 
             Toast.makeText(this, R.string.registro_realizado, Toast.LENGTH_SHORT).show();
-            String contrasenamd5 = md5(contraseña.getText().toString());
-            String SqlQuery = "INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contrasenamd5 + "', 0)";
-            background1 bg = new background1(this);
-            bg.execute(SqlQuery, "insert");
 
-            Intent intent= new Intent(this, Login.class);
-            startActivity(intent);
-        }
-
+        }*/
+        //String SqlQuery = "INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contrasenamd5 + "', 0)";
+        new background1(this).execute();
     }
 
-    public boolean validarTelefono(){
+    public boolean validarTelefono() {
 
         Pattern pattern = Pattern.compile("^(\\+34|0034|34)?[6789]\\d{8}$");
 
@@ -99,7 +103,7 @@ public class Registro extends AppCompatActivity {
         }
     }
 
-    public boolean validarNombre(){
+    public boolean validarNombre() {
 
         Pattern pattern = Pattern.compile("^[A-Za-zá-úÁ-ÚñÑ ]*$");
 
@@ -114,7 +118,7 @@ public class Registro extends AppCompatActivity {
         }
     }
 
-    public boolean validarApellidos(){
+    public boolean validarApellidos() {
 
         Pattern pattern = Pattern.compile("^[A-Za-zá-úÁ-ÚñÑ ]*$");
 
@@ -129,7 +133,7 @@ public class Registro extends AppCompatActivity {
         }
     }
 
-    public boolean validarCorreo(){
+    public boolean validarCorreo() {
 
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
@@ -149,16 +153,15 @@ public class Registro extends AppCompatActivity {
         String DNI = dni.getText().toString();
         String letraMayuscula = "";
 
-        if(dni.length() != 9 || Character.isLetter(DNI.charAt(8)) == false ) {
+        if (dni.length() != 9 || Character.isLetter(DNI.charAt(8)) == false) {
             return false;
         }
 
         letraMayuscula = (DNI.substring(8)).toUpperCase();
 
-        if(soloNumeros() == true && letraDNI().equals(letraMayuscula)) {
+        if (soloNumeros() == true && letraDNI().equals(letraMayuscula)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -168,23 +171,22 @@ public class Registro extends AppCompatActivity {
         int i, j = 0;
         String numero = "";
         String miDNI = "";
-        String[] unoNueve = {"0","1","2","3","4","5","6","7","8","9"};
+        String[] unoNueve = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
         String DNI = dni.getText().toString();
 
-        for(i = 0; i < dni.length() - 1; i++) {
-            numero = DNI.substring(i, i+1);
+        for (i = 0; i < dni.length() - 1; i++) {
+            numero = DNI.substring(i, i + 1);
 
-            for(j = 0; j < unoNueve.length; j++) {
-                if(numero.equals(unoNueve[j])) {
+            for (j = 0; j < unoNueve.length; j++) {
+                if (numero.equals(unoNueve[j])) {
                     miDNI += unoNueve[j];
                 }
             }
         }
 
-        if(miDNI.length() != 8) {
+        if (miDNI.length() != 8) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -192,7 +194,7 @@ public class Registro extends AppCompatActivity {
     private String letraDNI() {
 
         String DNI = dni.getText().toString();
-        int miDNI = Integer.parseInt(DNI.substring(0,8));
+        int miDNI = Integer.parseInt(DNI.substring(0, 8));
         int resto = 0;
         String miLetra = "";
         String[] asignacionLetra = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
@@ -228,131 +230,66 @@ public class Registro extends AppCompatActivity {
         return "";
     }
 
-    public class background1 extends AsyncTask<String, Void, String> {
 
-        AlertDialog dialog;
+    public class background1 extends AsyncTask<Void, Void, Boolean> {
+
+        String contrasenamd5 = md5(contraseña.getText().toString());
+        String dniI = dni.getText().toString();
+        String nombreI = nombre.getText().toString();
+        String apellidosI = apellidos.getText().toString();
+        String correoI = correo.getText().toString();
+        String telefonoI = telefono.getText().toString();
+
         Context context;
-        public background1(Context context){
+        private String url = "jdbc:mysql://10.0.2.2:3306/alojamiento";
+        private String user = "root";
+        private String pass = "";
+
+
+        public background1(Context context) {
             this.context = context;
         }
-        protected void onPreExecute(){
-            dialog = new AlertDialog.Builder(context).create();
-            dialog.setTitle("Login Status");
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            try {
+                con = (Connection) DriverManager.getConnection(url, user, pass);
+
+
+                Statement st = con.createStatement();
+                //st.executeQuery("INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dniI + "', '" + nombreI + "', '" + apellidosI + "', '" + correoI + "', '" + telefonoI + "', '" + contrasenamd5 + "', 0)");
+                String query = " insert into usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO)"
+                        + " values (?, ?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement preparedStmt = con.prepareStatement(query);
+                preparedStmt.setString (1, dniI);
+                preparedStmt.setString (2, nombreI);
+                preparedStmt.setString   (3, apellidosI);
+                preparedStmt.setString(4, correoI);
+                preparedStmt.setString    (5, telefonoI);
+                preparedStmt.setString    (6, contrasenamd5);
+                preparedStmt.setInt    (7, 0);
+                preparedStmt.execute();
+
+
+                con.close();
+                return true;
+            } catch (SQLException e) {
+                System.out.println(e.getSQLState());
+                return false;
+            }
         }
 
-        protected void onPostExecute(String s){
+        @Override
+        protected void onPostExecute(Boolean cargaOk) {
+            if (cargaOk == true) {
 
-            if(!"0 results".equals(s)){
-                try {
-                    JSONArray array = new JSONArray(s);
-                    JSONObject json_data = array.getJSONObject(0);
-                    super.onPostExecute(s);
-
-                    Intent intent = new Intent(context, Menu.class);
-                    intent.putExtra("variable_nombre", json_data.getString("nombre"));
-                    intent.putExtra("variable_dni", json_data.getString("dni"));
-                    context.startActivity(intent);
-
-                } catch (JSONException e) {
-
-                }
-
+                Toast.makeText(context, "TODO BIEN", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, Login.class);
+                startActivity(intent);
             } else {
-
+                Toast.makeText(context, "DATOS INCORRECTOS", Toast.LENGTH_LONG).show();
             }
-
         }
-
-
-        protected String doInBackground(String... voids){
-            StringBuilder result = new StringBuilder();
-            String SqlQuery = voids[0];
-            String tipo = voids[1];
-
-            String connect = "http://10.0.2.2:80/connect.php";
-
-            if(tipo.equals("select")){
-                try {
-                    URL url = new URL(connect);
-                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                    http.setRequestMethod("POST");
-                    http.setDoInput(true);
-
-                    OutputStream ops = http.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops, "UTF-8"));
-                    String data = URLEncoder.encode("SqlQuery", "UTF-8") + "="+URLEncoder.encode(SqlQuery, "UTF-8")
-                            + "&&"+URLEncoder.encode("tipo", "UTF-8") + "="+URLEncoder.encode(tipo, "UTF-8");
-
-                    writer.write(data);
-                    writer.flush();
-                    writer.close();
-                    ops.close();
-
-                    InputStream ips = http.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(ips, "UTF-8"));
-                    String line = "";
-
-                    while((line = reader.readLine()) != null){
-                        result.append(line);
-                    }
-
-                    reader.close();
-                    ips.close();
-                    http.disconnect();
-
-                    return result.toString();
-
-                } catch (MalformedURLException e) {
-                    result.append(e.getMessage() + "ERROR 1");
-                } catch (IOException e) {
-                    result.append(e.getMessage() + "ERROR 2");
-                }
-
-                return result.toString();
-            } else if (tipo.equals("insert")){
-                try {
-                    URL url = new URL(connect);
-                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                    http.setRequestMethod("POST");
-                    http.setDoInput(true);
-                    http.setDoOutput(true);
-
-                    OutputStream ops = http.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops, "UTF-8"));
-                    String data = URLEncoder.encode("SqlQuery", "UTF-8") + "="+URLEncoder.encode(SqlQuery, "UTF-8")
-                            + "&&"+URLEncoder.encode("tipo", "UTF-8") + "="+URLEncoder.encode(tipo, "UTF-8");
-
-                    writer.write(data);
-                    writer.flush();
-                    writer.close();
-                    ops.close();
-                    InputStream ips = http.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(ips, "UTF-8"));
-                    String line = "";
-
-                    while((line = reader.readLine()) != null){
-                        result.append(line);
-                    }
-
-                    reader.close();
-                    ips.close();
-                    http.disconnect();
-
-
-                } catch (MalformedURLException e) {
-                    result.append(e.getMessage() + "ERROR 1");
-                } catch (IOException e) {
-                    result.append(e.getMessage() + "ERROR 2");
-                }
-                return result.toString();
-            }
-
-            return result.toString();
-        }
-
-
-
     }
-
-
 }
