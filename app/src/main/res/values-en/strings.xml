@@ -27,4 +27,17 @@
     <string name="correo_incorrecto">INCORRECT E-MAIL</string>
     <string name="contraseña_no_coincide">PASSWORD DOES NOT MATCH</string>
     <string name="registro_realizado">Registration successful.</string>
+    <string name="busquedalabel">Select de condition of the search</string>
+    <string name="nombre">Name</string>
+    <string name="tipoalojamiento_label">Lodging</string>
+    <string name="provincia_label">Province</string>
+    <string name="Municipio">Municipality</string>
+    <string-array name="tipo_alojamiento">
+        <item></item>
+        <item>Camping</item>
+        <item>Hostel</item>
+        <item>Rural House</item>
+    </string-array>
+    <string name="usuario_o_contraseña_incorrecta">WRONG PASSWORD OR E-MAIL</string>
+    <string name="Registro_realizado_correctamente">Successful registered.</string>
 </resources>

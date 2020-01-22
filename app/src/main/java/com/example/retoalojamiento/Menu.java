@@ -40,10 +40,13 @@ public class Menu extends AppCompatActivity {
 
         nombre = (TextView) findViewById(R.id.nombre);
 
-        String recuperamos_variable_string = getIntent().getStringExtra("variable_nombre");
-        nombre.setText(recuperamos_variable_string);
+        SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+
+        nombre.setText(preferences.getString("nombre",""));
+
 
     }
+
     public void SalirMenuBtn (View view){
         Intent intent= new Intent(this, Login.class);
         startActivity(intent);
@@ -53,6 +56,16 @@ public class Menu extends AppCompatActivity {
     public void MapaBtn (View view){
         Intent intent= new Intent(this, Mapa.class);
         startActivity(intent);
+    }
 
+    public void MisReservasBtn (View view){
+        Intent intent = new Intent(this, MisReservas.class);
+        String recuperamos_variable_dni = getIntent().getStringExtra("variable_dni");
+        intent.putExtra("dni", recuperamos_variable_dni);
+        this.startActivity(intent);
+    }
+    public void abusquedas (View view) {
+        Intent intent= new Intent(this, FiltroBusqueda.class);
+        startActivity(intent);
     }
 }

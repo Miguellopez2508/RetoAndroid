@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -28,66 +26,29 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
+public class VerAlojamientos extends AppCompatActivity {
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
-
-    public EditText gmail;
-    private EditText contraseña;
-
+    private ListView listaAlojamientos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_ver_alojamientos);
 
-        gmail = (EditText) findViewById(R.id.et_correo);
-        contraseña = (EditText) findViewById(R.id.et_contrasena);
+        listaAlojamientos = (ListView)findViewById(R.id.listView_alojamientos);
 
-        Button button = findViewById(R.id.btn_iniciarSesion);
-        button.setOnClickListener(this);
+        SharedPreferences prefe = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        String query = prefe.getString("query", "");
 
-    }
+        System.out.println(query);
 
-    public static final String md5(final String s) {
-        final String MD5 = "MD5";
-        try {
-
-            MessageDigest digest = java.security.MessageDigest.getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    @Override
-    public void onClick(View view) {
-        String contrasena = md5(contraseña.getText().toString());
-        String email = gmail.getText().toString();
-        String SqlQuery = "SELECT dni, nombre FROM usuario WHERE email='" + email +"' AND password='" + contrasena + "'";
         background1 bg = new background1(this);
-        bg.execute(SqlQuery, "select");
-        contraseña.setText("");
+        bg.execute(query, "select");
     }
 
-    public void BotonRegistro (View view){
-        Intent intent= new Intent(this, Registro.class);
-        startActivity(intent);
-    }
+
 
     public class background1 extends AsyncTask<String, Void, String> {
 
@@ -103,30 +64,29 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         protected void onPostExecute(String s){
 
-//            if(!"0 results".equals(s)){
-//                try {
-//                    JSONArray array = new JSONArray(s);
-//                    JSONObject json_data = array.getJSONObject(0);
-//                    super.onPostExecute(s);
-//
-//                    Intent intent = new Intent(context, Menu.class);
-//                    SharedPreferences preferencias = getSharedPreferences("datos",Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = preferencias.edit();
-//                    editor.putString("dni", json_data.getString("dni"));
-//                    editor.putString("nombre", json_data.getString("nombre"));
-//                    editor.commit();
-//                    context.startActivity(intent);
-//
-//                } catch (JSONException e) {
-//
-//                }
-//
-//            } else {
-//                Toast.makeText(context, R.string.usuario_o_contraseña_incorrecta, Toast.LENGTH_LONG).show();
-//            }
+            if(!"0 results".equals(s)){
+                try {
 
-            Intent intent = new Intent(context, Menu.class);
-            context.startActivity(intent);
+                    ArrayList<String> aloj = new ArrayList();
+
+                    JSONArray array = new JSONArray(s);
+
+                    for (int i = 0; i < array.length(); i++) {
+
+                        JSONObject json_data = array.getJSONObject(i);
+                        aloj.add("Nombre: " + json_data.getString("nombre") + " Tipo: " + json_data.getString("tipo") + " Territorio: " + json_data.getString("territorio") + " Municipio:" + json_data.getString("municipio"));
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, aloj);
+                    listaAlojamientos.setAdapter(adapter);
+
+                } catch (JSONException e) {
+                    Toast.makeText(context, "Json vacio", Toast.LENGTH_LONG).show();
+                }
+
+            } else {
+                Toast.makeText(context, "No hay ningun alojamiento.", Toast.LENGTH_LONG).show();
+            }
 
         }
 
