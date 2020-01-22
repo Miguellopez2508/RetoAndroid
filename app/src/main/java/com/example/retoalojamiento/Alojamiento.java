@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class Alojamiento {
 
-    public String Signatura;
+    public String id;
     public String Nombre;
     public String Descripcion;
     public String Telefono;
@@ -20,8 +20,8 @@ public class Alojamiento {
     public String Municipio;
     public String Territorio;
 
-    public Alojamiento(String signatura, String nombre, String descripcion, String telefono, String direccion, String email, String web, String tipoDeAlojamiento, int capacidad, int codigoPostal, String longitud, String latitud, String municipio, String territorio) {
-        this.Signatura = signatura;
+    public Alojamiento(String id, String nombre, String descripcion, String telefono, String direccion, String email, String web, String tipoDeAlojamiento, int capacidad, int codigoPostal, String longitud, String latitud, String municipio, String territorio) {
+        this.id = id;
         this.Nombre = nombre;
         this.Descripcion = descripcion;
         this.Telefono = telefono;
@@ -42,12 +42,14 @@ public class Alojamiento {
     }
 
     public Alojamiento(JSONObject objetoJSON) throws JSONException {
-        this.Signatura = objetoJSON.getString("Signatura");
-        this.Nombre = objetoJSON.getString("Nombre");
-        this.Descripcion = objetoJSON.getString("Descripcion");
-        this.Telefono = objetoJSON.getString("Telefono");
-        this.Direccion = objetoJSON.getString("Direccion");
-        this.Email = objetoJSON.getString("Email");
+        this.id = objetoJSON.getString("id");
+        this.Nombre = objetoJSON.getString("nombre");
+        //this.Descripcion = objetoJSON.getString("Descripcion");
+
+        //this.Telefono = objetoJSON.getString("Telefono");
+        //this.Direccion = objetoJSON.getString("Direccion");
+        //this.Email = objetoJSON.getString("Email");
+        /*
         this.Web = objetoJSON.getString("Web");
         this.TipoDeAlojamiento = objetoJSON.getString("TipoDeAlojamiento");
         this.Capacidad = objetoJSON.getInt("Capacidad");
@@ -56,6 +58,10 @@ public class Alojamiento {
         this.Latitud = objetoJSON.getString("Latitud");
         this.Municipio = objetoJSON.getString("Municipio");
         this.Territorio = objetoJSON.getString("Territorio");
+
+         */
+
+
     }
 
     public String getMunicipio() {
@@ -76,13 +82,13 @@ public class Alojamiento {
         Territorio = territorio;
     }
 
-    public String getSignatura() {
-        return Signatura;
+    public String getId() {
+        return id;
     }
 
 
-    public void setSignatura(String signatura) {
-        this.Signatura = signatura;
+    public void setId(String id) {
+        this.id = id;
     }
 
 
