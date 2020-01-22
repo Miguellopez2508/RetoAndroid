@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -65,16 +66,10 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
     }
 
     public void BotonRegistro (View view){
-        Intent intent= new Intent(this, CargadorDeDatos.class);
+        Intent intent= new Intent(this, Registro.class);
         startActivity(intent);
     }
 
-
-//                   SharedPreferences preferencias = getSharedPreferences("datos",Context.MODE_PRIVATE);
-//                   SharedPreferences.Editor editor = preferencias.edit();
-//                   editor.putString("dni", json_data.getString("dni"));
-//                   editor.putString("nombre", json_data.getString("nombre"));
-//                   editor.commit();
 
     public class background1 extends AsyncTask<Void, Void, Boolean> {
 
@@ -101,6 +96,11 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
                 ResultSet rs = st.executeQuery("SELECT dni, nombre FROM usuario WHERE email='" + email +"' AND password='" + contrasena + "'");
 
                 if (rs.next()){
+                    SharedPreferences preferencias = getSharedPreferences("datos",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferencias.edit();
+                    editor.putString("dni", rs.getString("dni"));
+                    editor.putString("nombre", rs.getString("nombre"));
+                    editor.commit();
                     st.close();
                     return true;
                 } else {
