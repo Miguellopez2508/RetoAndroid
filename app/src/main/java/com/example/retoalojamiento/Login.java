@@ -1,42 +1,28 @@
 package com.example.retoalojamiento;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
+import com.mysql.jdbc.Connection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity  implements View.OnClickListener{
 
     public EditText gmail;
     private EditText contraseña;
-
+    Connection con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +31,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         gmail = (EditText) findViewById(R.id.et_correo);
         contraseña = (EditText) findViewById(R.id.et_contrasena);
-
-        Button button = findViewById(R.id.btn_iniciarSesion);
-        button.setOnClickListener(this);
 
     }
 
@@ -74,13 +57,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         return "";
     }
 
+
     @Override
     public void onClick(View view) {
-        String contrasena = md5(contraseña.getText().toString());
-        String email = gmail.getText().toString();
-        String SqlQuery = "SELECT dni, nombre FROM usuario WHERE email='" + email +"' AND password='" + contrasena + "'";
-        background1 bg = new background1(this);
-        bg.execute(SqlQuery, "select");
+        new background1(this).execute();
         contraseña.setText("");
     }
 
@@ -89,136 +69,58 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         startActivity(intent);
     }
 
-    public class background1 extends AsyncTask<String, Void, String> {
 
-        AlertDialog dialog;
+    public class background1 extends AsyncTask<Void, Void, Boolean> {
+
+        String contrasena = md5(contraseña.getText().toString());
+        String email = gmail.getText().toString();
+
         Context context;
-        public background1(Context context){
+        private String url = "jdbc:mysql://10.0.2.2:3306/alojamiento";
+        private String user = "root";
+        private String pass = "";
+
+
+        public background1(Context context) {
             this.context = context;
         }
-        protected void onPreExecute(){
-            dialog = new AlertDialog.Builder(context).create();
-            dialog.setTitle("Login Status");
-        }
 
-        protected void onPostExecute(String s){
-
-//            if(!"0 results".equals(s)){
-//                try {
-//                    JSONArray array = new JSONArray(s);
-//                    JSONObject json_data = array.getJSONObject(0);
-//                    super.onPostExecute(s);
-//
-//                    Intent intent = new Intent(context, Menu.class);
-//                    SharedPreferences preferencias = getSharedPreferences("datos",Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = preferencias.edit();
-//                    editor.putString("dni", json_data.getString("dni"));
-//                    editor.putString("nombre", json_data.getString("nombre"));
-//                    editor.commit();
-//                    context.startActivity(intent);
-//
-//                } catch (JSONException e) {
-//
-//                }
-//
-//            } else {
-//                Toast.makeText(context, R.string.usuario_o_contraseña_incorrecta, Toast.LENGTH_LONG).show();
-//            }
-
-            Intent intent = new Intent(context, Menu.class);
-            context.startActivity(intent);
-
-        }
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            try {
+                con = (Connection) DriverManager.getConnection(url, user, pass);
 
 
-        protected String doInBackground(String... voids){
-            StringBuilder result = new StringBuilder();
-            String SqlQuery = voids[0];
-            String tipo = voids[1];
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery("SELECT dni, nombre FROM usuario WHERE email='" + email +"' AND password='" + contrasena + "'");
 
-            String connect = "http://10.0.2.2:80/connect.php";
-
-            if(tipo.equals("select")){
-                try {
-                    URL url = new URL(connect);
-                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                    http.setRequestMethod("POST");
-                    http.setDoInput(true);
-
-                    OutputStream ops = http.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops, "UTF-8"));
-                    String data = URLEncoder.encode("SqlQuery", "UTF-8") + "="+URLEncoder.encode(SqlQuery, "UTF-8")
-                            + "&&"+URLEncoder.encode("tipo", "UTF-8") + "="+URLEncoder.encode(tipo, "UTF-8");
-
-                    writer.write(data);
-                    writer.flush();
-                    writer.close();
-                    ops.close();
-
-                    InputStream ips = http.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(ips, "UTF-8"));
-                    String line = "";
-
-                    while((line = reader.readLine()) != null){
-                        result.append(line);
-                    }
-
-                    reader.close();
-                    ips.close();
-                    http.disconnect();
-
-                    return result.toString();
-
-                } catch (MalformedURLException e) {
-                    result.append(e.getMessage() + "ERROR 1");
-                } catch (IOException e) {
-                    result.append(e.getMessage() + "ERROR 2");
+                if (rs.next()){
+                    SharedPreferences preferencias = getSharedPreferences("datos",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferencias.edit();
+                    editor.putString("dni", rs.getString("dni"));
+                    editor.putString("nombre", rs.getString("nombre"));
+                    editor.commit();
+                    st.close();
+                    return true;
+                } else {
+                    st.close();
+                    return false;
                 }
-
-                return result.toString();
-            } else if (tipo.equals("insert")){
-                try {
-                    URL url = new URL(connect);
-                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                    http.setRequestMethod("POST");
-                    http.setDoInput(true);
-                    http.setDoOutput(true);
-
-                    OutputStream ops = http.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops, "UTF-8"));
-                    String data = URLEncoder.encode("SqlQuery", "UTF-8") + "="+URLEncoder.encode(SqlQuery, "UTF-8")
-                            + "&&"+URLEncoder.encode("tipo", "UTF-8") + "="+URLEncoder.encode(tipo, "UTF-8");
-
-                    writer.write(data);
-                    writer.flush();
-                    writer.close();
-                    ops.close();
-                    InputStream ips = http.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(ips, "UTF-8"));
-                    String line = "";
-
-                    while((line = reader.readLine()) != null){
-                        result.append(line);
-                    }
-
-                    reader.close();
-                    ips.close();
-                    http.disconnect();
-
-
-                } catch (MalformedURLException e) {
-                    result.append(e.getMessage() + "ERROR 1");
-                } catch (IOException e) {
-                    result.append(e.getMessage() + "ERROR 2");
-                }
-                return result.toString();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
             }
-
-            return result.toString();
         }
 
-
-
+        @Override
+        protected void onPostExecute(Boolean cargaOk) {
+            if(cargaOk == true){
+                Intent intent= new Intent(context, Menu.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(context, R.string.usuario_o_contraseña_incorrecta, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }
