@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void BotonRegistro (View view){
-        Intent intent= new Intent(this, Registro.class);
+        Intent intent= new Intent(this, CargadorDeDatos.class);
         startActivity(intent);
     }
 

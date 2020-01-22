@@ -35,6 +35,7 @@ public class CargadorDeDatos extends AppCompatActivity {
     TextView tv;
     Connection con;
     String resul = "";
+    Modelo mod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class CargadorDeDatos extends AppCompatActivity {
         setContentView(R.layout.activity_cargador_de_datos);
 
         tv = (TextView) findViewById(R.id.textView6);
+        mod = (Modelo) getApplication();
 
         new background1(this).execute();
     }
@@ -64,14 +66,29 @@ public class CargadorDeDatos extends AppCompatActivity {
             try {
                 con = (Connection) DriverManager.getConnection(url, user, pass);
 
+                //buscar como hacerlo con prepared statement
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("select * from alojamientos");
 
-
+                //meter los campos que se me han olvidado
                 while (rs.next()) {
-                    resul += rs.getString("nombre");
+                    Alojamiento alojamiento = new Alojamiento();
+                    alojamiento.setNombre(rs.getString("nombre"));
+                    alojamiento.setId(rs.getString("id"));
+                    alojamiento.setDescripcion(rs.getString("descripcion"));
+                    alojamiento.setTelefono(rs.getString("telefono"));
+                    alojamiento.setDireccion(rs.getString("direccion"));
+                    alojamiento.setEmail(rs.getString("email"));
+                    alojamiento.setWeb(rs.getString("web"));
+                    alojamiento.setTipoDeAlojamiento(rs.getString("tipo"));
+                    alojamiento.setCapacidad(rs.getInt("capacidad"));
+                    alojamiento.setCodigoPostal(rs.getInt("codigo_postal"));
+                    alojamiento.setLatitud(rs.getString("latitud"));
+                    alojamiento.setLongitud(rs.getString("longitud"));
+                    mod.alojamientos.add(alojamiento);
                 }
 
+                st.close();
 
             } catch (SQLException e) {
                 e.printStackTrace();
