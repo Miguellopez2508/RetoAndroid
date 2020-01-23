@@ -2,183 +2,93 @@ package com.example.retoalojamiento;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.mysql.jdbc.Connection;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class VerAlojamientos extends AppCompatActivity {
-
+    com.mysql.jdbc.Connection con;
     private ListView listaAlojamientos;
+    private String query;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_alojamientos);
 
-        listaAlojamientos = (ListView)findViewById(R.id.listView_alojamientos);
+        listaAlojamientos = findViewById(R.id.listView_alojamientos);
 
         SharedPreferences prefe = getSharedPreferences("datos", Context.MODE_PRIVATE);
-        String query = prefe.getString("query", "");
+        query = prefe.getString("query", "");
 
         System.out.println(query);
-
-        background1 bg = new background1(this);
-        bg.execute(query, "select");
-    }
-
-
-
-    public class background1 extends AsyncTask<String, Void, String> {
-
-        AlertDialog dialog;
-        Context context;
-        public background1(Context context){
-            this.context = context;
-        }
-        protected void onPreExecute(){
-            dialog = new AlertDialog.Builder(context).create();
-            dialog.setTitle("Login Status");
-        }
-
-        protected void onPostExecute(String s){
-
-            if(!"0 results".equals(s)){
-                try {
-
-                    ArrayList<String> aloj = new ArrayList();
-
-                    JSONArray array = new JSONArray(s);
-
-                    for (int i = 0; i < array.length(); i++) {
-
-                        JSONObject json_data = array.getJSONObject(i);
-                        aloj.add("Nombre: " + json_data.getString("nombre") + " Tipo: " + json_data.getString("tipo") + " Territorio: " + json_data.getString("territorio") + " Municipio:" + json_data.getString("municipio"));
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, aloj);
-                    listaAlojamientos.setAdapter(adapter);
-
-                } catch (JSONException e) {
-                    Toast.makeText(context, "Json vacio", Toast.LENGTH_LONG).show();
-                }
-
-            } else {
-                Toast.makeText(context, "No hay ningun alojamiento.", Toast.LENGTH_LONG).show();
-            }
-
-        }
-
-
-        protected String doInBackground(String... voids){
-            StringBuilder result = new StringBuilder();
-            String SqlQuery = voids[0];
-            String tipo = voids[1];
-
-            String connect = "http://10.0.2.2:80/connect.php";
-
-            if(tipo.equals("select")){
-                try {
-                    URL url = new URL(connect);
-                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                    http.setRequestMethod("POST");
-                    http.setDoInput(true);
-
-                    OutputStream ops = http.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops, "UTF-8"));
-                    String data = URLEncoder.encode("SqlQuery", "UTF-8") + "="+URLEncoder.encode(SqlQuery, "UTF-8")
-                            + "&&"+URLEncoder.encode("tipo", "UTF-8") + "="+URLEncoder.encode(tipo, "UTF-8");
-
-                    writer.write(data);
-                    writer.flush();
-                    writer.close();
-                    ops.close();
-
-                    InputStream ips = http.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(ips, "UTF-8"));
-                    String line = "";
-
-                    while((line = reader.readLine()) != null){
-                        result.append(line);
-                    }
-
-                    reader.close();
-                    ips.close();
-                    http.disconnect();
-
-                    return result.toString();
-
-                } catch (MalformedURLException e) {
-                    result.append(e.getMessage() + "ERROR 1");
-                } catch (IOException e) {
-                    result.append(e.getMessage() + "ERROR 2");
-                }
-
-                return result.toString();
-            } else if (tipo.equals("insert")){
-                try {
-                    URL url = new URL(connect);
-                    HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                    http.setRequestMethod("POST");
-                    http.setDoInput(true);
-                    http.setDoOutput(true);
-
-                    OutputStream ops = http.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops, "UTF-8"));
-                    String data = URLEncoder.encode("SqlQuery", "UTF-8") + "="+URLEncoder.encode(SqlQuery, "UTF-8")
-                            + "&&"+URLEncoder.encode("tipo", "UTF-8") + "="+URLEncoder.encode(tipo, "UTF-8");
-
-                    writer.write(data);
-                    writer.flush();
-                    writer.close();
-                    ops.close();
-                    InputStream ips = http.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(ips, "UTF-8"));
-                    String line = "";
-
-                    while((line = reader.readLine()) != null){
-                        result.append(line);
-                    }
-
-                    reader.close();
-                    ips.close();
-                    http.disconnect();
-
-
-                } catch (MalformedURLException e) {
-                    result.append(e.getMessage() + "ERROR 1");
-                } catch (IOException e) {
-                    result.append(e.getMessage() + "ERROR 2");
-                }
-                return result.toString();
-            }
-
-            return result.toString();
-        }
-
-
+        new background1(this).execute();
 
     }
 
-}
+
+
+            public class background1 extends AsyncTask<Void, Void, Boolean> {
+
+                Context context;
+                private String url = "jdbc:mysql://10.0.2.2:3306/alojamiento";
+                private String user = "root";
+                private String pass = "";
+
+
+                public background1(Context context) {
+                    this.context = context;
+                }
+
+                @Override
+                protected Boolean doInBackground(Void... voids) {
+                    try {
+                        con = (Connection) DriverManager.getConnection(url, user, pass);
+                        Statement st = con.createStatement();
+                        ResultSet rs = st.executeQuery(query);
+                        ArrayList<String> aloj = new ArrayList();
+                        while (rs.next()) {
+                            aloj.add("Nombre: " + rs.getString("NOMBRE") + " Tipo: " + rs.getString("TIPO") + " Territorio: " + rs.getString("TERRITORIO") + " Municipio:" + rs.getString("MUNICIPIO") + "ID" + rs.getString("ID"));
+                        }
+                        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, aloj);
+                        return true;
+                    } catch (SQLException e) {
+                        System.out.println(e.getSQLState());
+                        return false;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(Boolean cargaOk) {
+                    if (cargaOk == true) {
+                        listaAlojamientos.setAdapter(adapter);
+                        listaAlojamientos.setOnItemClickListener(new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                String id = Integer.toString(view.getId());
+                                Toast.makeText(context,id, Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(context, "DATOS INCORRECTOS", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+        }
