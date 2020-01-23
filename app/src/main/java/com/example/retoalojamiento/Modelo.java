@@ -12,4 +12,11 @@ public class Modelo extends Application {
         alojamientos = new ArrayList<Alojamiento>();
     }
 
+    public ArrayList<Alojamiento> getAlojamientos() {
+        return alojamientos;
+    }
+
+    public void setAlojamientos(ArrayList<Alojamiento> alojamientos) {
+        this.alojamientos = alojamientos;
+    }
 }

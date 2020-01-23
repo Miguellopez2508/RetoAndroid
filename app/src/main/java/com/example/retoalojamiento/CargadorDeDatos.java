@@ -2,9 +2,9 @@ package com.example.retoalojamiento;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.TextView;
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,9 +13,7 @@ import java.sql.Statement;
 
 public class CargadorDeDatos extends AppCompatActivity {
 
-    TextView tv;
     Connection con;
-    String resul = "";
     Modelo mod;
 
     @Override
@@ -23,12 +21,10 @@ public class CargadorDeDatos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cargador_de_datos);
 
-        tv = (TextView) findViewById(R.id.textView6);
         mod = (Modelo) getApplication();
 
         new background1(this).execute();
     }
-
 
     public class background1 extends AsyncTask<Void, Void, Boolean> {
 
@@ -36,7 +32,6 @@ public class CargadorDeDatos extends AppCompatActivity {
         private String url = "jdbc:mysql://10.0.2.2:3306/alojamiento";
         private String user = "root";
         private String pass = "";
-
 
         public background1(Context context) {
             this.context = context;
@@ -66,6 +61,8 @@ public class CargadorDeDatos extends AppCompatActivity {
                     alojamiento.setCodigoPostal(rs.getInt("codigo_postal"));
                     alojamiento.setLatitud(rs.getString("latitud"));
                     alojamiento.setLongitud(rs.getString("longitud"));
+                    alojamiento.setMunicipio(rs.getString("municipio"));
+                    alojamiento.setTerritorio(rs.getString("territorio"));
                     mod.alojamientos.add(alojamiento);
                 }
 
@@ -81,7 +78,8 @@ public class CargadorDeDatos extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean cargaOk) {
             if (cargaOk) {
-                tv.setText(resul);
+                Intent intent = new Intent(context, SeleccionAlojamientos.class);
+                startActivity(intent);
             } else {
 
             }
