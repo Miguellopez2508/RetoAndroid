@@ -44,12 +44,10 @@ public class Alojamiento {
     public Alojamiento(JSONObject objetoJSON) throws JSONException {
         this.id = objetoJSON.getString("id");
         this.Nombre = objetoJSON.getString("nombre");
-        //this.Descripcion = objetoJSON.getString("Descripcion");
-
-        //this.Telefono = objetoJSON.getString("Telefono");
-        //this.Direccion = objetoJSON.getString("Direccion");
-        //this.Email = objetoJSON.getString("Email");
-        /*
+        this.Descripcion = objetoJSON.getString("Descripcion");
+        this.Telefono = objetoJSON.getString("Telefono");
+        this.Direccion = objetoJSON.getString("Direccion");
+        this.Email = objetoJSON.getString("Email");
         this.Web = objetoJSON.getString("Web");
         this.TipoDeAlojamiento = objetoJSON.getString("TipoDeAlojamiento");
         this.Capacidad = objetoJSON.getInt("Capacidad");
@@ -58,10 +56,6 @@ public class Alojamiento {
         this.Latitud = objetoJSON.getString("Latitud");
         this.Municipio = objetoJSON.getString("Municipio");
         this.Territorio = objetoJSON.getString("Territorio");
-
-         */
-
-
     }
 
     public String getMunicipio() {
