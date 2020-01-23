@@ -35,8 +35,8 @@
     <string-array name="tipo_alojamiento">
         <item></item>
         <item>Camping</item>
-        <item>Hostel</item>
-        <item>Rural House</item>
+        <item>Albergue</item>
+        <item>Alojamiento Rural</item>
     </string-array>
     <string name="usuario_o_contraseña_incorrecta">WRONG PASSWORD OR E-MAIL</string>
     <string name="Registro_realizado_correctamente">Successful registered.</string>

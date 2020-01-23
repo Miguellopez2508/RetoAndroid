@@ -35,8 +35,8 @@
     <string-array name="tipo_alojamiento">
         <item></item>
         <item>Camping</item>
-        <item>Ostatu</item>
-        <item>Landa-ostatzea</item>
+        <item>Albergue</item>
+        <item>Alojamiento Rural</item>
     </string-array>
     <string name="usuario_o_contraseña_incorrecta">POSTA ELEKTRONIKOA O PASAHITZA OKERRA</string>
     <string name="Registro_realizado_correctamente">Erregistroa sortu da.</string>

@@ -45,7 +45,7 @@ public class FiltroBusqueda extends AppCompatActivity {
     public void BusquedaOnClick(View view){
 
 
-        String consulta = "SELECT id,nombre,tipo,municipio,territorio FROM alojamientos WHERE ";
+        String consulta = "SELECT * FROM alojamientos WHERE ";
         String anadimos = "";
         if (!nombre.getText().toString().equals("")){
             anadimos += " LOWER(nombre) like LOWER('%" + nombre.getText().toString() + "%')";
@@ -60,7 +60,7 @@ public class FiltroBusqueda extends AppCompatActivity {
             if (!anadimos.equals("")){
                 anadimos += " AND";
             }
-            anadimos += "LOWER(territorio) like LOWER('%" + spinnerProvincias.getSelectedItem().toString() + "%')";
+            anadimos += " LOWER(territorio) like LOWER('%" + spinnerProvincias.getSelectedItem().toString() + "%')";
         }
         if (!municipio.getText().toString().equals("")){
             if (!anadimos.equals("")){
@@ -72,7 +72,6 @@ public class FiltroBusqueda extends AppCompatActivity {
             consulta = "SELECT id,nombre,tipo,municipio,territorio FROM alojamientos";
         }
 
-        anadimos += " limit 10";
         consulta = consulta + anadimos;
 
 
