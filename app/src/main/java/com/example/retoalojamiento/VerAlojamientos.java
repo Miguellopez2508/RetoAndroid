@@ -32,6 +32,7 @@ public class VerAlojamientos extends AppCompatActivity {
     Modelo mod;
     ArrayList<Alojamiento> listaAlojamientos;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,95 +44,95 @@ public class VerAlojamientos extends AppCompatActivity {
         SharedPreferences prefe = getSharedPreferences("datos", Context.MODE_PRIVATE);
         query = prefe.getString("query", "");
 
-        System.out.println(query);
         new background1(this).execute();
-
     }
 
 
 
-        public class background1 extends AsyncTask<Void, Void, Boolean> {
+    public class background1 extends AsyncTask<Void, Void, Boolean> {
 
-            AppCompatActivity appCompatActivity;
-            private String url = "jdbc:mysql://10.0.2.2:3306/alojamiento";
-            private String user = "root";
-            private String pass = "";
-            AdaptadorAlojamientos adpt;
+        Context context;
+        private String url = "jdbc:mysql://10.0.2.2:3306/alojamiento";
+        private String user = "root";
+        private String pass = "";
+        AdaptadorAlojamientos adpt;
 
 
-            public background1(AppCompatActivity context) {
-                appCompatActivity = context;
+        public background1(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            try {
+                con = (Connection) DriverManager.getConnection(url, user, pass);
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(query);
+
+                while (rs.next()) {
+                    Alojamiento alojamiento = new Alojamiento();
+                    alojamiento.setNombre(rs.getString("nombre"));
+                    alojamiento.setId(rs.getString("id"));
+                    alojamiento.setDescripcion(rs.getString("descripcion"));
+                    alojamiento.setTelefono(rs.getString("telefono"));
+                    alojamiento.setDireccion(rs.getString("direccion"));
+                    alojamiento.setEmail(rs.getString("email"));
+                    alojamiento.setWeb(rs.getString("web"));
+                    alojamiento.setTipoDeAlojamiento(rs.getString("tipo"));
+                    alojamiento.setCapacidad(rs.getInt("capacidad"));
+                    alojamiento.setCodigoPostal(rs.getInt("codigo_postal"));
+                    alojamiento.setLatitud(rs.getString("latitud"));
+                    alojamiento.setLongitud(rs.getString("longitud"));
+                    alojamiento.setMunicipio(rs.getString("municipio"));
+                    alojamiento.setTerritorio(rs.getString("territorio"));
+                    mod.alojamientos.add(alojamiento);
+                }
+                adpt = new AdaptadorAlojamientos(context);
+
+                return true;
+            } catch (SQLException e) {
+                System.out.println(e.getSQLState());
+                return false;
             }
+        }
 
-            @Override
-            protected Boolean doInBackground(Void... voids) {
-                try {
-                    con = (Connection) DriverManager.getConnection(url, user, pass);
-                    Statement st = con.createStatement();
-                    ResultSet rs = st.executeQuery(query);
-
-                    while (rs.next()) {
-                        Alojamiento alojamiento = new Alojamiento();
-                        alojamiento.setNombre(rs.getString("nombre"));
-                        alojamiento.setId(rs.getString("id"));
-                        alojamiento.setDescripcion(rs.getString("descripcion"));
-                        alojamiento.setTelefono(rs.getString("telefono"));
-                        alojamiento.setDireccion(rs.getString("direccion"));
-                        alojamiento.setEmail(rs.getString("email"));
-                        alojamiento.setWeb(rs.getString("web"));
-                        alojamiento.setTipoDeAlojamiento(rs.getString("tipo"));
-                        alojamiento.setCapacidad(rs.getInt("capacidad"));
-                        alojamiento.setCodigoPostal(rs.getInt("codigo_postal"));
-                        alojamiento.setLatitud(rs.getString("latitud"));
-                        alojamiento.setLongitud(rs.getString("longitud"));
-                        alojamiento.setMunicipio(rs.getString("municipio"));
-                        alojamiento.setTerritorio(rs.getString("territorio"));
-                        mod.alojamientos.add(alojamiento);
+        @Override
+        protected void onPostExecute(Boolean cargaOk) {
+            if (cargaOk == true) {
+                la.setAdapter(adpt);
+                la.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        String id = Integer.toString(view.getId());
+                        Toast.makeText(context,id, Toast.LENGTH_LONG).show();
                     }
-                    adpt = new AdaptadorAlojamientos(appCompatActivity);
-
-                    return true;
-                } catch (SQLException e) {
-                    System.out.println(e.getSQLState());
-                    return false;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Boolean cargaOk) {
-                if (cargaOk == true) {
-                    la.setAdapter(adpt);
-                    la.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            String id = Integer.toString(view.getId());
-                            Toast.makeText(appCompatActivity,id, Toast.LENGTH_LONG).show();
-                        }
-                    });
-                } else {
-                    Toast.makeText(appCompatActivity, "DATOS INCORRECTOS", Toast.LENGTH_LONG).show();
-                }
+                });
+            } else {
+                Toast.makeText(context, "DATOS INCORRECTOS", Toast.LENGTH_LONG).show();
             }
         }
 
-    class AdaptadorAlojamientos extends ArrayAdapter<Alojamiento> {
-        AppCompatActivity appCompatActivity;
+        class AdaptadorAlojamientos extends ArrayAdapter<Alojamiento> {
+            AppCompatActivity appCompatActivity;
 
-        AdaptadorAlojamientos(AppCompatActivity context) {
-            super(context, R.layout.alojamiento, listaAlojamientos);
-            appCompatActivity = context;
-        }
+            AdaptadorAlojamientos(Context context) {
+                super(context, R.layout.alojamiento, listaAlojamientos);
+                this.appCompatActivity = (AppCompatActivity) context;
+            }
 
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = appCompatActivity.getLayoutInflater();
-            View item = inflater.inflate(R.layout.alojamiento, null);
-            TextView textView1 = (TextView)item.findViewById(R.id.textView2);
-            TextView textView2 = (TextView)item.findViewById(R.id.textView5);
-            textView1.setText(listaAlojamientos.get(position).getNombre());
-            textView2.setText(listaAlojamientos.get(position).getDescripcion());
+            public View getView(int position, View convertView, ViewGroup parent) {
+                LayoutInflater inflater = appCompatActivity.getLayoutInflater();
+                View item = inflater.inflate(R.layout.alojamiento, null);
+                TextView textView1 = (TextView)item.findViewById(R.id.textView2);
+                TextView textView2 = (TextView)item.findViewById(R.id.textView5);
+                textView1.setText(listaAlojamientos.get(position).getNombre());
+                textView2.setText(listaAlojamientos.get(position).getDescripcion());
 
-            return(item);
+                return(item);
+            }
         }
     }
+
+
 
 }
