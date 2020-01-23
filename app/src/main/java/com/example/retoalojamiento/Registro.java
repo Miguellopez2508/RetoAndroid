@@ -1,39 +1,18 @@
 package com.example.retoalojamiento;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.mysql.jdbc.Connection;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.regex.Matcher;
@@ -67,7 +46,7 @@ public class Registro extends AppCompatActivity {
 
     public void comprobarDatos(View v) {
 
-        /*if (validarDni() == false || dni.getText().toString().equals("")) {
+        if (validarDni() == false || dni.getText().toString().equals("")) {
             Toast.makeText(this, R.string.dni_incorrecto, Toast.LENGTH_SHORT).show();
         } else if (validarNombre() == false || nombre.getText().toString().equals("")) {
             Toast.makeText(this, R.string.nombre_incorrecto, Toast.LENGTH_SHORT).show();
@@ -80,12 +59,10 @@ public class Registro extends AppCompatActivity {
         } else if (!contraseña.getText().toString().equals(confirmarContraseña.getText().toString()) || contraseña.getText().toString().equals("")) {
             Toast.makeText(this, R.string.contraseña_no_coincide, Toast.LENGTH_SHORT).show();
         } else {
+            new background1(this).execute();
+        }
 
-            Toast.makeText(this, R.string.registro_realizado, Toast.LENGTH_SHORT).show();
 
-        }*/
-        //String SqlQuery = "INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dni.getText().toString() + "', '" + nombre.getText().toString() + "', '" + apellidos.getText().toString() + "', '" + correo.getText().toString() + "', '" + telefono.getText().toString() + "', '" + contrasenamd5 + "', 0)";
-        new background1(this).execute();
     }
 
     public boolean validarTelefono() {
@@ -209,12 +186,11 @@ public class Registro extends AppCompatActivity {
     public static final String md5(final String s) {
         final String MD5 = "MD5";
         try {
-            // Create MD5 Hash
+
             MessageDigest digest = java.security.MessageDigest.getInstance(MD5);
             digest.update(s.getBytes());
             byte messageDigest[] = digest.digest();
 
-            // Create Hex String
             StringBuilder hexString = new StringBuilder();
             for (byte aMessageDigest : messageDigest) {
                 String h = Integer.toHexString(0xFF & aMessageDigest);
@@ -255,11 +231,9 @@ public class Registro extends AppCompatActivity {
             try {
                 con = (Connection) DriverManager.getConnection(url, user, pass);
 
-
                 Statement st = con.createStatement();
-                //st.executeQuery("INSERT INTO usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO) VALUES ('" + dniI + "', '" + nombreI + "', '" + apellidosI + "', '" + correoI + "', '" + telefonoI + "', '" + contrasenamd5 + "', 0)");
-                String query = " insert into usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO)"
-                        + " values (?, ?, ?, ?, ?, ?, ?)";
+
+                String query = " insert into usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO)" + " values (?, ?, ?, ?, ?, ?, ?)";
 
                 PreparedStatement preparedStmt = con.prepareStatement(query);
                 preparedStmt.setString (1, dniI);
@@ -283,7 +257,6 @@ public class Registro extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean cargaOk) {
             if (cargaOk == true) {
-
                 Toast.makeText(context, "TODO BIEN", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, Login.class);
                 startActivity(intent);
