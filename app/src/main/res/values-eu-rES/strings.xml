@@ -40,4 +40,18 @@
     </string-array>
     <string name="usuario_o_contraseña_incorrecta">POSTA ELEKTRONIKOA O PASAHITZA OKERRA</string>
     <string name="Registro_realizado_correctamente">Erregistroa sortu da.</string>
+    <string name="btn_reservar">Erreserbatu</string>
+    <string name="detalles_telefono">Mugikorra:</string>
+    <string name="detalles_territorio">Lurralde:</string>
+    <string name="detalles_tipo">Tipoa:</string>
+    <string name="detalles_nombre">Izena:</string>
+    <string name="detalles_municipio">Udala:</string>
+    <string name="detalles_direccion">Helbidea:</string>
+    <string name="detalles_descripcion">Deskribapena:</string>
+    <string name="detalles_pagina">Web-orria:</string>
+    <string name="detalles_email">Posta Elektronikoa:</string>
+    <string name="detalles_codigopostal">Posta kodea:</string>
+    <string name="detalles_capacidad">Ahalmena:</string>
+    <string name="Fecha_Fin">Hasiera Data</string>
+    <string name="Fecha_Inicio">Amaiera Data</string>
 </resources>

@@ -23,7 +23,6 @@ public class Menu extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
         nombre.setText(preferences.getString("nombre",""));
 
-
     }
 
     public void SalirMenuBtn (View view){

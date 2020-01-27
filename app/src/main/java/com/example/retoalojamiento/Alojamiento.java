@@ -61,31 +61,21 @@ public class Alojamiento {
     public String getMunicipio() {
         return Municipio;
     }
-
-    public String getTerritorio() {
-        return Territorio;
-    }
-
-
     public void setMunicipio(String municipio) {
         Municipio = municipio;
     }
-
-
+    public String getTerritorio() {
+        return Territorio;
+    }
     public void setTerritorio(String territorio) {
         Territorio = territorio;
     }
-
     public String getId() {
         return id;
     }
-
-
     public void setId(String id) {
         this.id = id;
     }
-
-
     public String getNombre() {
         return Nombre;
     }
@@ -125,9 +115,7 @@ public class Alojamiento {
     public String getTipoDeAlojamiento() {
         return TipoDeAlojamiento;
     }
-    public void setTipoDeAlojamiento(String tipoDeAlojamiento) {
-        TipoDeAlojamiento = tipoDeAlojamiento;
-    }
+    public void setTipoDeAlojamiento(String tipoDeAlojamiento) { TipoDeAlojamiento = tipoDeAlojamiento; }
     public int getCapacidad() {
         return Capacidad;
     }

@@ -39,4 +39,19 @@
     </string-array>
     <string name="usuario_o_contraseña_incorrecta">GMAIL O CONTRASEÑA INCORRECTA</string>
     <string name="Registro_realizado_correctamente">Registro realizado correctamente.</string>
+    <string name="btn_reservar">Reservar</string>
+    <string name="detalles_tipo">Tipo:</string>
+    <string name="detalles_nombre">Nombre:</string>
+    <string name="detalles_descripcion">Descripcion:</string>
+    <string name="detalles_telefono">Telefono:</string>
+    <string name="detalles_direccion">Direccion:</string>
+    <string name="detalles_municipio">Municipio:</string>
+    <string name="detalles_territorio">Territorio:</string>
+    <string name="detalles_email">Email:</string>
+    <string name="detalles_pagina">Web:</string>
+    <string name="detalles_codigopostal">Codigo Postal</string>
+    <string name="detalles_capacidad">Capacidad:</string>
+    <string name="Fecha_Inicio">Fecha Inicio</string>
+    <string name="Fecha_Fin">Fecha Fin</string>
+    <string name="Indicar_las_fechas_de_la_reserva">Indicar las fechas de la reserva</string>
 </resources>

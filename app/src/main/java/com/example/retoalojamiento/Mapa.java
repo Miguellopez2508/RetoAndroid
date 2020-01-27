@@ -1,14 +1,9 @@
 package com.example.retoalojamiento;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.Toast;
-
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -18,11 +13,8 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mysql.jdbc.Connection;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,13 +29,14 @@ public class Mapa extends AppCompatActivity {
     ArrayList<String> latitud = new ArrayList<>();
     ArrayList<String> longitud = new ArrayList<>();
     ArrayList<String> nombre = new ArrayList<>();
+    ArrayList<String> tipo = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        new background1(this).execute();
-
         super.onCreate(savedInstanceState);
+
+        new background1(this).execute();
 
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
 
@@ -69,13 +62,10 @@ public class Mapa extends AppCompatActivity {
                 });
             }
         });
-
         setContentView(mapView);
 
-
-
-
     }
+
 
     @Override
     public void onResume() {
@@ -137,10 +127,11 @@ public class Mapa extends AppCompatActivity {
                 con = (Connection) DriverManager.getConnection(url, user, pass);
 
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select nombre, latitud, longitud from alojamientos");
+                ResultSet rs = st.executeQuery("select nombre, tipo, latitud, longitud from alojamientos");
 
                 while (rs.next()) {
                     nombre.add(rs.getString("nombre"));
+                    tipo.add(rs.getString("tipo"));
                     latitud.add(rs.getString("latitud"));
                     longitud.add(rs.getString("longitud"));
                 }
@@ -179,11 +170,12 @@ public class Mapa extends AppCompatActivity {
 
                 LatLng cordenada = new LatLng(b, a);
 
-                mapboxMap.addMarker(new MarkerOptions().position(cordenada).title(nombre.get(i)));
+                mapboxMap.addMarker(new MarkerOptions().position(cordenada).title(tipo.get(i) + ": " +nombre.get(i)));
             }
 
         }
 
     }
+
 
 }

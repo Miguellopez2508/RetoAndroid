@@ -40,4 +40,18 @@
     </string-array>
     <string name="usuario_o_contraseña_incorrecta">WRONG PASSWORD OR E-MAIL</string>
     <string name="Registro_realizado_correctamente">Successful registered.</string>
+    <string name="btn_reservar">Reserve</string>
+    <string name="detalles_municipio">Municipality:</string>
+    <string name="detalles_territorio">Territory:</string>
+    <string name="detalles_tipo">Type:</string>
+    <string name="detalles_telefono">Phone:</string>
+    <string name="detalles_nombre">Name:</string>
+    <string name="detalles_direccion">Address:</string>
+    <string name="detalles_descripcion">Description:</string>
+    <string name="detalles_pagina">Web:</string>
+    <string name="detalles_email">E-mail:</string>
+    <string name="detalles_codigopostal">" Postal Code:"</string>
+    <string name="detalles_capacidad">" Capacity:"</string>
+    <string name="Fecha_Fin">Start date</string>
+    <string name="Fecha_Inicio">Finish date</string>
 </resources>

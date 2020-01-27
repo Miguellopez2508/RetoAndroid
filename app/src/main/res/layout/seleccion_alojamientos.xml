@@ -5,11 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SeleccionAlojamientos">
+    tools:context=".SeleccionAlojamientos"
+    android:background="#d8000000">
 
     <ListView
         android:id="@+id/lista"
+        style="@android:style/Widget.DeviceDefault.Light.ListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@android:color/background_dark"
+        android:divider="@color/colorPrimaryDark" />
 
 </LinearLayout>

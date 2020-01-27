@@ -257,11 +257,11 @@ public class Registro extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean cargaOk) {
             if (cargaOk == true) {
-                Toast.makeText(context, "TODO BIEN", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, R.string.registro_realizado, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, Login.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(context, "DATOS INCORRECTOS", Toast.LENGTH_LONG).show();
+
             }
         }
     }

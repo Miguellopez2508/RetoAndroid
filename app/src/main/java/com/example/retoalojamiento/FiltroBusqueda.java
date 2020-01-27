@@ -22,7 +22,7 @@ public class FiltroBusqueda extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filtro_busqueda);
+        setContentView(R.layout.filtro_busqueda);
 
         spinnerAlojamientos = (Spinner) findViewById(R.id.spinnerAlojamientos);
         spinnerProvincias = (Spinner) findViewById(R.id.spinnerProvincias);
@@ -80,7 +80,8 @@ public class FiltroBusqueda extends AppCompatActivity {
         editor.putString("query", consulta);
         editor.commit();
 
-        Intent intent= new Intent(this, VerAlojamientos.class);
+
+        Intent intent= new Intent(this, SeleccionAlojamientos.class);
         startActivity(intent);
     }
 
