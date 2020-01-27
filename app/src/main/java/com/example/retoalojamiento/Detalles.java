@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
@@ -40,7 +41,6 @@ public class Detalles extends AppCompatActivity {
         direccion = (TextView) findViewById(R.id.detalles_direccion);
         tipo = (TextView) findViewById(R.id.detalles_tipo);
 
-
         SharedPreferences prefe = getSharedPreferences("datos", Context.MODE_PRIVATE);
 
         String id = prefe.getString("id", "");
@@ -56,7 +56,7 @@ public class Detalles extends AppCompatActivity {
          direccion.setText(prefe.getString("direccion", ""));
          tipo.setText(prefe.getString("tipo", ""));
 
-
+        descripcion.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public void reservar(View v){
