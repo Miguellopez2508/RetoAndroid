@@ -118,8 +118,7 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
                 startActivity(intent);
             } else {
                 Toast.makeText(context, R.string.usuario_o_contraseña_incorrecta, Toast.LENGTH_LONG).show();
-                Intent intent= new Intent(context, Menu.class);
-                startActivity(intent);
+
             }
         }
     }

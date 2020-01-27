@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="176dp"
         android:text="@string/detalles_email"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="parent"
@@ -240,8 +240,9 @@
 
     <TextView
         android:id="@+id/detalles_descripcion"
-        android:layout_width="260dp"
-        android:layout_height="182dp"
+
+        android:layout_width="277dp"
+        android:layout_height="183dp"
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
         android:layout_marginTop="16dp"
@@ -279,9 +280,9 @@
         android:id="@+id/button3"
         android:layout_width="204dp"
         android:layout_height="64dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginLeft="104dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="93dp"
+        android:layout_marginLeft="93dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/btn_fondo_color"
         android:onClick="reservar"
         android:text="@string/btn_reservar"

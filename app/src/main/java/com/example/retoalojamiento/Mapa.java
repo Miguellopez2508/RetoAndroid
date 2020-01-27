@@ -1,8 +1,12 @@
 package com.example.retoalojamiento;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -64,6 +68,22 @@ public class Mapa extends AppCompatActivity {
         });
         setContentView(mapView);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.menu_volver) {
+            Intent i = new Intent(this, com.example.retoalojamiento.Menu.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

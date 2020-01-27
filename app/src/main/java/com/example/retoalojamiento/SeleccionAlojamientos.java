@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -40,6 +42,23 @@ public class SeleccionAlojamientos extends AppCompatActivity {
         rv = (ListView) findViewById(R.id.lista);
 
         new background1(this).execute();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.menu_volver) {
+            mod.alojamientos = new ArrayList<>();
+            Intent i = new Intent(this, FiltroBusqueda.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
