@@ -295,6 +295,7 @@
         android:layout_marginLeft="11dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_fondo_color"
+        android:onClick="vermapa"
         android:text="@string/Ver_mapa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView26" />

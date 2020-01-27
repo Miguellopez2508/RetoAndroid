@@ -64,4 +64,8 @@ public class Detalles extends AppCompatActivity {
         Intent intent= new Intent(this, Reservar.class);
         startActivity(intent);
     }
+    public void vermapa(View v){
+        Intent intent= new Intent(this, MapaDetalle.class);
+        startActivity(intent);
+    }
 }

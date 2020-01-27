@@ -26,7 +26,6 @@ import android.os.Bundle;
 
 public class MapaDetalle extends AppCompatActivity {
     private MapView mapView;
-    Connection con;
     String latitud;
     String longitud;
     String nombre;
@@ -34,19 +33,18 @@ public class MapaDetalle extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mapa_detalle);
 
         SharedPreferences prefe = getSharedPreferences("datos", Context.MODE_PRIVATE);
         latitud = prefe.getString("latitud","");
         longitud = prefe.getString("longitud","");
-        nombre = prefe.getString("nombre","");
+        nombre = prefe.getString("nombreAloj","");
         tipo = prefe.getString("tipo","");
 
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
         MapboxMapOptions options = MapboxMapOptions.createFromAttributes(this, null)
                 .camera(new CameraPosition.Builder()
-                        .target(new LatLng(Double.parseDouble(latitud), Double.parseDouble(longitud)))
-                        .zoom(15)
+                        .target(new LatLng( Double.parseDouble(longitud),Double.parseDouble(latitud)))
+                        .zoom(10)
                         .build());
         mapView = new MapView(this, options);
         mapView.onCreate(savedInstanceState);
@@ -64,13 +62,14 @@ public class MapaDetalle extends AppCompatActivity {
                 });
             }
         });
+
         setContentView(mapView);
 
     }
 
     public void cordenadas(String latitud, String longitud, MapboxMap mapboxMap){
 
-                LatLng cordenada = new LatLng(Double.parseDouble(latitud), Double.parseDouble(longitud));
+                LatLng cordenada = new LatLng( Double.parseDouble(longitud), Double.parseDouble(latitud));
 
                 mapboxMap.addMarker(new MarkerOptions().position(cordenada).title(tipo + ": " +nombre));
     }
