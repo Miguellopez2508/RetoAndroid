@@ -37,8 +37,17 @@ public class SeleccionAlojamientos extends AppCompatActivity {
         setContentView(R.layout.seleccion_alojamientos);
 
         mod = (Modelo) getApplication();
+        rv = (ListView) findViewById(R.id.lista);
 
         new background1(this).execute();
+    }
+
+    @Override
+    public void onBackPressed (){
+        mod.alojamientos = new ArrayList<>();
+
+        Intent intent= new Intent(this, FiltroBusqueda.class);
+        startActivity(intent);
     }
 
     public void cambiar(int i) {
