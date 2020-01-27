@@ -54,4 +54,6 @@
     <string name="detalles_capacidad">" Capacity:"</string>
     <string name="Fecha_Fin">Start date</string>
     <string name="Fecha_Inicio">Finish date</string>
+    <string name="Indicar_las_fechas_de_la_reserva">Select the dates of the booking</string>
+    <string name="cargando">Loading...</string>
 </resources>

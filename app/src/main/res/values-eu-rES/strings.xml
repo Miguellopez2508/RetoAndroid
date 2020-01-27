@@ -54,4 +54,6 @@
     <string name="detalles_capacidad">Ahalmena:</string>
     <string name="Fecha_Fin">Hasiera Data</string>
     <string name="Fecha_Inicio">Amaiera Data</string>
+    <string name="Indicar_las_fechas_de_la_reserva">" Adierazi erreserbaren datak"</string>
+    <string name="cargando">Kargatzen...</string>
 </resources>

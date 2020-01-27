@@ -39,7 +39,6 @@
     </string-array>
     <string name="usuario_o_contraseña_incorrecta">GMAIL O CONTRASEÑA INCORRECTA</string>
     <string name="Registro_realizado_correctamente">Registro realizado correctamente.</string>
-<<<<<<< HEAD
     <string name="btn_reservar">Reservar</string>
     <string name="detalles_tipo">Tipo:</string>
     <string name="detalles_nombre">Nombre:</string>
@@ -55,7 +54,5 @@
     <string name="Fecha_Inicio">Fecha Inicio</string>
     <string name="Fecha_Fin">Fecha Fin</string>
     <string name="Indicar_las_fechas_de_la_reserva">Indicar las fechas de la reserva</string>
-=======
     <string name="cargando">Cargando...</string>
->>>>>>> 0a742052865417f2c16b75c898e2ac3dd28ee91f
 </resources>
