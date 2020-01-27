@@ -58,9 +58,6 @@ public class MisReservas extends AppCompatActivity {
 
         Context context;
         Statement st;
-        private String url = "jdbc:mysql://10.0.2.2:3306/alojamiento";
-        private String user = "root";
-        private String pass = "";
         ArrayList<String> reservas;
 
         SharedPreferences prefe = getSharedPreferences("datos", Context.MODE_PRIVATE);
@@ -73,7 +70,7 @@ public class MisReservas extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                con = (Connection) DriverManager.getConnection(url, user, pass);
+                con = new ConnectionClass().Conn();
 
                 st = con.createStatement();
                 ResultSet rs = st.executeQuery("SELECT NOMBRE, FECHA_INICIO, FECHA_FIN FROM reservas, alojamientos where reservas.ID_ALOJAMIENTO = alojamientos.ID and DNI = '" + dni + "'");

@@ -75,9 +75,6 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
         String email = gmail.getText().toString();
 
         Context context;
-        private String url = "jdbc:mysql://10.0.2.2:3306/alojamiento";
-        private String user = "root";
-        private String pass = "";
 
 
         public background1(Context context) {
@@ -87,7 +84,7 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                con = (Connection) DriverManager.getConnection(url, user, pass);
+                con = new ConnectionClass().Conn();
 
 
                 Statement st = con.createStatement();
