@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -88,6 +89,23 @@ public class FiltroBusqueda extends AppCompatActivity {
     public void SalirBtn(View view){
         Intent intent= new Intent(this, Menu.class);
         startActivity(intent);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.menu_volver) {
+            Intent i = new Intent(this, FiltroBusqueda.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

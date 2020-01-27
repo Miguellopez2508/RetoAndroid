@@ -59,4 +59,5 @@
     <string name="Reserva_realizada">Reserva realizada con exito.</string>
     <string name="error_fechas">ERROR: fecha de inicio es mayor que la fecha fin</string>
     <string name="fechas_vacias">Seleccione las fechas</string>
+    <string name="Ver_mapa">Ver mapa</string>
 </resources>

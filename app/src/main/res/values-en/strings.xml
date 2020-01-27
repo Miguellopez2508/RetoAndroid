@@ -60,4 +60,5 @@
     <string name="Reserva_realizada">Booking made successfully.</string>
     <string name="error_fechas">ERROR: Start date is greater than the end date</string>
     <string name="fechas_vacias">Selected the dates</string>
+    <string name="Ver_mapa">"Show map "</string>
 </resources>
