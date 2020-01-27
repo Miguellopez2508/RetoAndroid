@@ -41,6 +41,7 @@ public class Reservar extends AppCompatActivity {
 
     public void reservar (View v){
         new background1(this).execute();
+
     }
 
     public void IntroducirFecha1(View v) {
@@ -106,7 +107,7 @@ public class Reservar extends AppCompatActivity {
 
                 SharedPreferences prefe = getSharedPreferences("datos", Context.MODE_PRIVATE);
                 String dni = prefe.getString("dni", "");
-                String id = prefe.getString("dni", "");
+                String id = prefe.getString("id", "");
                 String fechaIni = prefe.getString("fecha_inicio", "");
                 String fechaFini = prefe.getString("fecha_fin", "");
 
