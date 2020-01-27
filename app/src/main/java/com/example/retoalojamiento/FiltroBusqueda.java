@@ -31,12 +31,12 @@ public class FiltroBusqueda extends AppCompatActivity {
         municipio = (EditText) findViewById(R.id.municipio_aloj);
 
 
-        ArrayAdapter<CharSequence> alojamientos = ArrayAdapter.createFromResource(this,R.array.tipo_alojamiento, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> alojamientos = ArrayAdapter.createFromResource(this,R.array.tipo_alojamiento, R.layout.spinner_item);
         alojamientos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAlojamientos.setAdapter(alojamientos);
 
         String[] provinciasArray = new String[]{"","Bizkaia","Araba/Alava","Gipuzkoa"};
-        ArrayAdapter<String> provincias= new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, provinciasArray);
+        ArrayAdapter<String> provincias= new ArrayAdapter<String>(this,R.layout.spinner_item, provinciasArray);
         provincias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProvincias.setAdapter(provincias);
 
