@@ -58,4 +58,6 @@
     <string name="cargando">Loading...</string>
     <string name="Reservar">Reserve</string>
     <string name="Reserva_realizada">Booking made successfully.</string>
+    <string name="error_fechas">ERROR: Start date is greater than the end date</string>
+    <string name="fechas_vacias">Selected the dates</string>
 </resources>

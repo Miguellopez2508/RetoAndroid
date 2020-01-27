@@ -14,11 +14,15 @@
         android:layout_marginStart="52dp"
         android:layout_marginLeft="52dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
         android:ems="10"
         android:hint="@string/Municipio"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF "
         android:textColorHint="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerProvincias" />
 
@@ -69,21 +73,27 @@
 
     <Spinner
         android:id="@+id/spinnerAlojamientos"
-        android:layout_width="248dp"
-        android:layout_height="35dp"
+        android:layout_width="303dp"
+        android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginLeft="52dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tipoalojamiento_label" />
 
     <Spinner
         android:id="@+id/spinnerProvincias"
-        android:layout_width="245dp"
-        android:layout_height="35dp"
+        android:layout_width="303dp"
+        android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginLeft="52dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/provincia_label" />
 
@@ -94,11 +104,15 @@
         android:layout_marginStart="52dp"
         android:layout_marginLeft="52dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginRight="55dp"
         android:ems="10"
         android:hint="@string/nombre"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF "
         android:textColorHint="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/busqueda_label" />
 

@@ -20,7 +20,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Reservar extends AppCompatActivity {
 
@@ -40,7 +43,24 @@ public class Reservar extends AppCompatActivity {
     }
 
     public void reservar (View v){
-        new background1(this).execute();
+
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+
+        try {
+            if(fechaInicio.getText().toString().equals("") || fechaFin.getText().toString().equals("")){
+                Toast.makeText(this, R.string.fechas_vacias, Toast.LENGTH_LONG).show();
+            }else {
+                Date dateInicio = formato.parse(fechaInicio.getText().toString());
+                Date dateFin = formato.parse(fechaFin.getText().toString());
+                if (dateInicio.compareTo(dateFin) < 0 || dateInicio.compareTo(dateFin) == 0) {
+                    new background1(this).execute();
+                } else {
+                    Toast.makeText(this, R.string.error_fechas, Toast.LENGTH_LONG).show();
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -51,7 +71,7 @@ public class Reservar extends AppCompatActivity {
         mes = calendar.get(Calendar.MONTH);
         año = calendar.get(Calendar.YEAR);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int año, int mes, int dia) {
                 fechaInicio.setText(año+"/"+(mes+1)+"/"+dia);
@@ -62,6 +82,7 @@ public class Reservar extends AppCompatActivity {
             }
         }
                 ,dia,mes,año);
+        datePickerDialog.updateDate(2020,1,1);
         datePickerDialog.show();
     }
 
@@ -83,6 +104,7 @@ public class Reservar extends AppCompatActivity {
             }
         }
                 ,dia,mes,año);
+        datePickerDialog.updateDate(2020,1,1);
         datePickerDialog.show();
     }
 
@@ -131,7 +153,7 @@ public class Reservar extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean cargaOk) {
             if (cargaOk) {
-                Toast.makeText(context, R.string.Reserva_realizada, Toast.LENGTH_LONG).show();
+          //      Toast.makeText(context, R.string.Reserva_realizada, Toast.LENGTH_LONG).show();
                 Intent intent= new Intent(context, MisReservas.class);
                 startActivity(intent);
             } else {

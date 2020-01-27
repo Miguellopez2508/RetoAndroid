@@ -57,5 +57,7 @@
     <string name="Indicar_las_fechas_de_la_reserva">Adierazi erreserbaren datak</string>
     <string name="cargando">Kargatzen...</string>
     <string name="Reservar">Erreserbatu</string>
-    <string name="Reserva_realizada">" Erreserba egin da."</string>
+    <string name="Reserva_realizada">Erreserba egin da.</string>
+    <string name="error_fechas">ERROR: Hasierako data amaiera data baino handiagoa da</string>
+    <string name="fechas_vacias">Aukeratu datak</string>
 </resources>
