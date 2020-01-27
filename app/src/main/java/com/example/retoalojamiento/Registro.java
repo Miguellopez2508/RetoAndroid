@@ -210,7 +210,7 @@ public class Registro extends AppCompatActivity {
     public class background1 extends AsyncTask<Void, Void, Boolean> {
 
         String contrasenamd5 = md5(contraseña.getText().toString());
-        String dniI = dni.getText().toString();
+        String dniI = dni.getText().toString().toUpperCase();
         String nombreI = nombre.getText().toString();
         String apellidosI = apellidos.getText().toString();
         String correoI = correo.getText().toString();
@@ -261,7 +261,7 @@ public class Registro extends AppCompatActivity {
                 Intent intent = new Intent(context, Login.class);
                 startActivity(intent);
             } else {
-
+                Toast.makeText(context, R.string.Dni_o_gmail_existen, Toast.LENGTH_LONG).show();
             }
         }
     }

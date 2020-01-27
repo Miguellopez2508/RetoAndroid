@@ -121,28 +121,14 @@
 
     <Button
         android:id="@+id/busquedaFiltroBtn"
-        android:layout_width="196dp"
-        android:layout_height="89dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="359dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/btn_fondo_color"
         android:onClick="BusquedaOnClick"
         android:text="@string/busqueda"
-        app:layout_constraintStart_toEndOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/municipio_aloj" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="196dp"
-        android:layout_height="89dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="44dp"
-        android:background="@drawable/btn_fondo_color"
-        android:onClick="SalirBtn"
-        android:text="@string/btn_volver"
-        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/municipio_aloj" />
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -67,5 +68,22 @@ public class Detalles extends AppCompatActivity {
     public void vermapa(View v){
         Intent intent= new Intent(this, MapaDetalle.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.menu_volver) {
+            Intent i = new Intent(this, SeleccionAlojamientos.class);
+            startActivity(i);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

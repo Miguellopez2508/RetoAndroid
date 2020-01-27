@@ -60,4 +60,5 @@
     <string name="error_fechas">ERROR: fecha de inicio es mayor que la fecha fin</string>
     <string name="fechas_vacias">Seleccione las fechas</string>
     <string name="Ver_mapa">Ver mapa</string>
+    <string name="Dni_o_gmail_existen">DNI O GMAIL YA EXISTEN.</string>
 </resources>

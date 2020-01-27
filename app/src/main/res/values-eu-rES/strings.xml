@@ -61,4 +61,5 @@
     <string name="error_fechas">ERROR: Hasierako data amaiera data baino handiagoa da</string>
     <string name="fechas_vacias">Aukeratu datak</string>
     <string name="Ver_mapa">Ikusi mapa</string>
+    <string name="Dni_o_gmail_existen">NAN EDO POSTA ELEKTRONIKOA EXISTITZEN DIRA.</string>
 </resources>

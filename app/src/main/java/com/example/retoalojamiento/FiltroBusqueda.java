@@ -70,7 +70,7 @@ public class FiltroBusqueda extends AppCompatActivity {
             anadimos += " LOWER(municipio) like LOWER('%" + municipio.getText().toString() + "%')";
         }
         if(anadimos.equals("")){
-            consulta = "SELECT id,nombre,tipo,municipio,territorio FROM alojamientos";
+            consulta = "SELECT * FROM alojamientos";
         }
 
         consulta = consulta + anadimos;
@@ -102,9 +102,10 @@ public class FiltroBusqueda extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id==R.id.menu_volver) {
-            Intent i = new Intent(this, FiltroBusqueda.class);
+            Intent i = new Intent(this, Menu.class);
             startActivity(i);
         }
+
         return super.onOptionsItemSelected(item);
     }
 

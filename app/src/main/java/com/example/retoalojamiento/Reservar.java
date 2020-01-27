@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -40,6 +41,22 @@ public class Reservar extends AppCompatActivity {
 
         fechaInicio =(TextView)findViewById(R.id.textView14);
         fechaFin =(TextView)findViewById(R.id.textView15);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.menu_volver) {
+            Intent i = new Intent(this, Detalles.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void reservar (View v){
@@ -153,7 +170,7 @@ public class Reservar extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean cargaOk) {
             if (cargaOk) {
-          //      Toast.makeText(context, R.string.Reserva_realizada, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, R.string.Reserva_realizada, Toast.LENGTH_LONG).show();
                 Intent intent= new Intent(context, MisReservas.class);
                 startActivity(intent);
             } else {

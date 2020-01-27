@@ -1,6 +1,7 @@
 package com.example.retoalojamiento;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 public class MapaDetalle extends AppCompatActivity {
     private MapView mapView;
@@ -65,6 +67,23 @@ public class MapaDetalle extends AppCompatActivity {
 
         setContentView(mapView);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.menu_volver) {
+            Intent i = new Intent(this, Detalles.class);
+            startActivity(i);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void cordenadas(String latitud, String longitud, MapboxMap mapboxMap){
