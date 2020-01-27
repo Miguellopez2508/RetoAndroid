@@ -6,8 +6,8 @@
     <string name="apellidos_registro">"Last Name "</string>
     <string name="telefono_registro">Phone</string>
     <string name="btn_IniciarSesion">Login</string>
-    <string name="btn_AunNoTienesCuenta">" Do not have an account yet?"</string>
-    <string name="btn_CrearCuenta">" Create Account"</string>
+    <string name="btn_AunNoTienesCuenta">Do not have an account yet?</string>
+    <string name="btn_CrearCuenta">Create Account</string>
     <string name="btn_Registrar">Register</string>
     <string name="btn_ConfirmarContraseña">Confirm Password</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiZW5la29iczk4IiwiYSI6ImNrNWNjbmZ2YjFwbnczbXBhcTFjOGZqMnUifQ.3HfgbQf6iq4t7JrdYR8FqA</string>
@@ -50,10 +50,12 @@
     <string name="detalles_descripcion">Description:</string>
     <string name="detalles_pagina">Web:</string>
     <string name="detalles_email">E-mail:</string>
-    <string name="detalles_codigopostal">" Postal Code:"</string>
-    <string name="detalles_capacidad">" Capacity:"</string>
-    <string name="Fecha_Fin">Start date</string>
-    <string name="Fecha_Inicio">Finish date</string>
+    <string name="detalles_codigopostal">Postal Code:</string>
+    <string name="detalles_capacidad">Capacity:</string>
+    <string name="Fecha_Fin">Finish date</string>
+    <string name="Fecha_Inicio">Start date</string>
     <string name="Indicar_las_fechas_de_la_reserva">Select the dates of the booking</string>
     <string name="cargando">Loading...</string>
+    <string name="Reservar">Reserve</string>
+    <string name="Reserva_realizada">Booking made successfully.</string>
 </resources>
