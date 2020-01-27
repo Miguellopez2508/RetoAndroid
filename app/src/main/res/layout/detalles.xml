@@ -238,13 +238,14 @@
 
     <TextView
         android:id="@+id/detalles_descripcion"
+
         android:layout_width="277dp"
         android:layout_height="183dp"
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
         android:layout_marginTop="16dp"
         android:scrollbars="vertical"
-        android:text="TextView"
+        android:text="Curabitur volutpat arcu ex, vel pretium nibh malesuada eget. Maecenas a lacinia tellus. Nunc bibendum ligula erat, sit amet pretium nisi placerat nec. Nam est diam, placerat non condimentum id, condimentum at ipsum. Nulla facilisi. Donec eleifend aliquet quam, in commodo ex blandit sed. Quisque ultricies interdum tellus, in iaculis lectus tristique eget. Maecenas pharetra volutpat risus, non malesuada risus vehicula non. Nunc vel nisl convallis, vehicula dui at, imperdiet nunc. Curabitur venenatis vitae erat elementum rutrum. Donec vulputate eros id tellus porta sodales. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis gravida, nulla ac maximus tempor, lectus turpis fringilla dui, vel porttitor tellus massa ut neque. Maecenas quis eleifend libero, vitae suscipit sapien. Quisque est ante, lacinia non elit id, vulputate posuere sapien. Nam quis bibendum ipsum.  "
         android:textColor="@android:color/background_light"
         app:layout_constraintStart_toEndOf="@+id/textView23"
         app:layout_constraintTop_toBottomOf="@+id/detalles_nombre" />

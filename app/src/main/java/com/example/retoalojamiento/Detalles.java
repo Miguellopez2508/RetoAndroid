@@ -41,6 +41,7 @@ public class Detalles extends AppCompatActivity {
         direccion = (TextView) findViewById(R.id.detalles_direccion);
         tipo = (TextView) findViewById(R.id.detalles_tipo);
 
+
         SharedPreferences prefe = getSharedPreferences("datos", Context.MODE_PRIVATE);
 
         String id = prefe.getString("id", "");

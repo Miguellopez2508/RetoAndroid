@@ -84,6 +84,8 @@ public class SeleccionAlojamientos extends AppCompatActivity {
         editor.putString("capacidad", String.valueOf(mod.alojamientos.get(i).getCapacidad()));
         editor.putString("direccion", mod.alojamientos.get(i).getDireccion());
         editor.putString("tipo", mod.alojamientos.get(i).getTipoDeAlojamiento());
+        editor.putString("latitud", mod.alojamientos.get(i).getLatitud());
+        editor.putString("longitud", mod.alojamientos.get(i).getLongitud());
         editor.commit();
         Intent intent= new Intent(this, Detalles.class);
         startActivity(intent);
