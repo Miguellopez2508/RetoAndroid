@@ -85,5 +85,9 @@ public class FiltroBusqueda extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void SalirBtn(View view){
+        Intent intent= new Intent(this, Menu.class);
+        startActivity(intent);
+    }
 
 }
