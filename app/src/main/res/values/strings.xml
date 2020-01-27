@@ -55,4 +55,6 @@
     <string name="Fecha_Fin">Fecha Fin</string>
     <string name="Indicar_las_fechas_de_la_reserva">Indicar las fechas de la reserva</string>
     <string name="cargando">Cargando...</string>
+    <string name="Reservar">Reservar</string>
+    <string name="Reserva_realizada">Reserva realizada con exito.</string>
 </resources>
