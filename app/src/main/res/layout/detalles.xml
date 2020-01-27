@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Detalles"
@@ -240,13 +240,13 @@
 
     <TextView
         android:id="@+id/detalles_descripcion"
-        android:layout_width="281dp"
-        android:layout_height="207dp"
+        android:layout_width="260dp"
+        android:layout_height="182dp"
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
         android:layout_marginTop="16dp"
         android:scrollbars="vertical"
-        android:text="TextView"
+        android:text="Curabitur volutpat arcu ex, vel pretium nibh malesuada eget. Maecenas a lacinia tellus. Nunc bibendum ligula erat, sit amet pretium nisi placerat nec. Nam est diam, placerat non condimentum id, condimentum at ipsum. Nulla facilisi. Donec eleifend aliquet quam, in commodo ex blandit sed. Quisque ultricies interdum tellus, in iaculis lectus tristique eget. Maecenas pharetra volutpat risus, non malesuada risus vehicula non. Nunc vel nisl convallis, vehicula dui at, imperdiet nunc. Curabitur venenatis vitae erat elementum rutrum. Donec vulputate eros id tellus porta sodales. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis gravida, nulla ac maximus tempor, lectus turpis fringilla dui, vel porttitor tellus massa ut neque. Maecenas quis eleifend libero, vitae suscipit sapien. Quisque est ante, lacinia non elit id, vulputate posuere sapien. Nam quis bibendum ipsum.  "
         android:textColor="@android:color/background_light"
         app:layout_constraintStart_toEndOf="@+id/textView23"
         app:layout_constraintTop_toBottomOf="@+id/detalles_nombre" />
@@ -279,9 +279,9 @@
         android:id="@+id/button3"
         android:layout_width="204dp"
         android:layout_height="64dp"
-        android:layout_marginStart="106dp"
-        android:layout_marginLeft="106dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/btn_fondo_color"
         android:onClick="reservar"
         android:text="@string/btn_reservar"
