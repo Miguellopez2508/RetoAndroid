@@ -17,6 +17,7 @@
         android:ems="10"
         android:hint="@string/Municipio"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF "
         android:textColorHint="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerProvincias" />
@@ -96,6 +97,7 @@
         android:ems="10"
         android:hint="@string/nombre"
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF "
         android:textColorHint="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/busqueda_label" />
