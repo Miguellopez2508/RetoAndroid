@@ -13,6 +13,7 @@ import com.mysql.jdbc.Connection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -86,9 +87,12 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
             try {
                 con = new ConnectionClass().Conn();
 
+                String dni = "";
+                String nombre = "";
 
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("SELECT dni, nombre FROM usuario WHERE email='" + email +"' AND password='" + contrasena + "'");
+                String query = "SELECT dni, nombre FROM usuario WHERE email='" + email +"' AND password='" + contrasena + "'";
+                PreparedStatement preparedStmt = con.prepareStatement(query);
+                ResultSet rs = preparedStmt.executeQuery();
 
                 if (rs.next()){
                     SharedPreferences preferencias = getSharedPreferences("datos",Context.MODE_PRIVATE);
@@ -96,10 +100,12 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
                     editor.putString("dni", rs.getString("dni"));
                     editor.putString("nombre", rs.getString("nombre"));
                     editor.commit();
-                    st.close();
+                    preparedStmt.close();
+                    con.close();
                     return true;
                 } else {
-                    st.close();
+                    preparedStmt.close();
+                    con.close();
                     return false;
                 }
             } catch (SQLException e) {
