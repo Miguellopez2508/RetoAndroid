@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 class ConnectionClass {
-    private String url = "jdbc:mysql://192.168.101.43:3306/alojamiento";
+    private String url = "jdbc:mysql://192.168.101.11:3306/alojamiento";
     private String user = "reto";
     private String pass = "";
     Connection conn;

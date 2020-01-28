@@ -226,7 +226,6 @@ public class Registro extends AppCompatActivity {
             try {
                 con = new ConnectionClass().Conn();
 
-                Statement st = con.createStatement();
 
                 String query = " insert into usuario (DNI, NOMBRE, APELLIDOS, EMAIL, TELEFONO, PASSWORD, TIPO)" + " values (?, ?, ?, ?, ?, ?, ?)";
 
