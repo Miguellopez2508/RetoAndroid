@@ -7,11 +7,10 @@ import java.util.ArrayList;
 public class Modelo extends Application {
 
     ArrayList<Alojamiento> alojamientos;
-    Alojamiento alojamientoMapa;
 
     public Modelo() {
         alojamientos = new ArrayList<Alojamiento>();
-        alojamientoMapa = new Alojamiento();
+
     }
 
     public ArrayList<Alojamiento> getAlojamientos() {
@@ -22,11 +21,4 @@ public class Modelo extends Application {
         this.alojamientos = alojamientos;
     }
 
-    public void setAlojamientoMapa(Alojamiento alojamientoMapa) {
-        this.alojamientoMapa = alojamientoMapa;
-    }
-
-    public Alojamiento getAlojamientoMapa() {
-        return alojamientoMapa;
-    }
 }

@@ -243,7 +243,7 @@ public class Mapa extends AppCompatActivity {
                     editor.putString("nombreAloj", rs.getString("nombre"));
                     editor.putString("descripcion", rs.getString("descripcion"));
                     editor.putString("email", rs.getString("email"));
-                    editor.putString("web", rs.getString("web"));
+                    editor.putString("pagina", rs.getString("web"));
                     editor.putString("telefono", rs.getString("telefono"));
                     editor.putString("territorio", rs.getString("territorio"));
                     editor.putString("municipio", rs.getString("municipio"));
